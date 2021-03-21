@@ -1,3 +1,10 @@
-.topNav{
-    background-color: aqua;
-}
+li.nav-item{
+    padding: .5rem  .75rem;
+    align-items: center;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    cursor: pointer;
+ }
+
+ li.nav-item p {
+     margin: 0;
+ }

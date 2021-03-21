@@ -16,7 +16,8 @@
   </style>
   
 </svelte:head>
-<!-- <svelte:body class:name={bodyClass}></svelte:body> -->
+
+
 
 <div>
   <header>
@@ -43,8 +44,7 @@
         <Route path="/"><Landing /></Route>
       </div>
     </Router>
-    <h3>Hello {name}!</h3>
-    <p>site prototype v1</p>
+    
   </main>
   <footer />
 </div>

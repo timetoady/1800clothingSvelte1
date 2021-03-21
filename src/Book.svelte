@@ -1,7 +1,117 @@
 <script>
-
+import { Nav, NavItem} from 'sveltestrap';
+import Fa from 'svelte-fa'
+import { faDownload, faInfo } from '@fortawesome/free-solid-svg-icons'
+let pdfPreview = "defaultView.pdf";
+$: pdfURL = `./assets/pdfs/${pdfPreview}`
+const handleViewerUpdate = (url) => {
+    console.log("Clicked")
+    console.log(url)
+    pdfPreview = url;
+    console.log(pdfURL)
+}
 </script>
 
-<div>
-    <h1>The Book</h1>
+<svelte:head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="compStyles.css">
+</svelte:head>
+
+
+<div class="theBook">
+<div class="navigation">
+    <h5 >The Book</h5>
+    <Nav vertical>
+        <NavItem   >
+           <p on:click={() => handleViewerUpdate("1800-1819.pdf")}>
+            1800-1819
+           </p> 
+        </NavItem>
+        <NavItem value="1820-1829.pdf" >
+            <p on:click={() => handleViewerUpdate("1820-1829.pdf")}>
+                1820-1829
+               </p> 
+        </NavItem>
+        <NavItem >
+            <p on:click={() => handleViewerUpdate("1830s.pdf")}>
+                1830-1839
+               </p> 
+        </NavItem>
+        <NavItem >
+            <p on:click={() => handleViewerUpdate("1840s.pdf")}>
+                1840-1849
+               </p> 
+            
+        </NavItem>
+        <NavItem>
+            <p on:click={() => handleViewerUpdate("1850s.pdf")}>
+                1850-1859
+               </p> 
+        </NavItem>
+        <NavItem>
+            <p on:click={() => handleViewerUpdate("1860s.pdf")}>
+                1860-1869
+               </p> 
+        </NavItem>
+        <NavItem>
+            <p on:click={() => handleViewerUpdate("1870s.pdf")}>
+                1870-1879
+               </p> 
+        </NavItem>
+    </Nav>
 </div>
+<div class="viewer">
+
+
+<div class="bookBox">
+    <a class="download" href={pdfURL} download> <Fa icon={faDownload}/> Download Book</a>
+</div>
+<div class="viewerBox">
+    <iframe title="PDFviewer" src={pdfURL}></iframe>
+</div>
+</div>
+
+</div>
+
+<style>
+.theBook{
+   display: flex;
+   
+}
+.navigation {
+    
+    min-width: 12rem;
+    border-right: 1px solid rgba(128, 128, 128, 0.5);
+    background-color: #ddd;
+    height: 100vh;
+}
+ .navigation h5{
+     margin: 0;
+    padding: .25rem .75rem;
+    background-color: #888;
+ }
+.download{
+    text-align: right;
+    padding-right: 2rem;
+    margin-bottom: 0;
+}
+.viewer{
+    margin: 0 auto;
+}
+.viewerBox{
+    width: 70vw;
+    padding: .2rem 2rem;
+}
+
+.viewerBox iframe{
+    width: 100%;
+    height: 80vh;
+}
+
+a.download{
+    text-align: right;
+}
+div.bookBox{
+    text-align: right;
+}
+</style>
