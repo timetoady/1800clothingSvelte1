@@ -8,9 +8,30 @@ div.card-body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+    cursor: pointer;
+    min-height: 52.7vh;
 }
 
 div.card-footer{
     background-color: #f4f4f4;
+  }
+
+  div.card {
+      height: 100%;
+  }
+
+  @media screen and (max-width: 700px) {
+    .light-pagination-nav div{
+    max-width: 100%;
+    font-size: .7rem;
+}
+span.option.number{
+    padding: .2rem .4rem !important;
+}
+h5.modal-title{
+    font-size: 1rem;
+}
+div.modal{
+    max-height: 100% !important;
+}
   }

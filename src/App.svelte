@@ -51,11 +51,7 @@
 
 <style>
 
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
+
   header {
     background-color: rgb(216, 216, 216);
     padding: 0;
@@ -73,5 +69,15 @@
 	  color: white;
 	  background-color: #333;
 	  padding: .25rem .7rem;
+  }
+
+  @media screen and (max-width: 700px) {
+   header{
+    flex-direction: column;
+    padding-bottom: .5rem; 
+   }
+   header img {
+     width: 100%;
+   }
   }
 </style>
