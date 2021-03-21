@@ -5,11 +5,13 @@
   import { faFilter } from "@fortawesome/free-solid-svg-icons";
   import { paginate, LightPaginationNav } from "svelte-paginate";
   import { costumeList } from "./stores";
+  
   let isOpen = false;
   let items = $costumeList;
   let currentPage = 1;
   let pageSize = 6;
   $: paginatedItems = paginate({ items, pageSize, currentPage });
+  const imageSource = "assets/images/"
 
   //next: figure out how to do pagenated list of costumes/lazy load. Set costumes.json as store
   // Set up dynamic modal for when costume cards are clicked
@@ -151,9 +153,17 @@
       {#each paginatedItems as item}
         <li class="item">
           <Card>
+            <div class="modalClick">
             <CardBody>
-              {item.caption}
+              <div>
+                <img src="{imageSource}{item.image}" alt={item.caption} loading="lazy">
+              </div>
+              <div class="caption">
+                {item.caption}
+              </div>
+              
             </CardBody>
+          </div>
             <CardFooter>
               <button>
                 {item.pdf}
@@ -217,11 +227,20 @@
   .item{
     list-style: none;
     /* max-width: 10rem; */
+  
   }
   .item button{
     border-radius: 20px;
     background-color: #fff;
     padding: .25rem .7rem;
+  }
+  .item img{
+    object-fit: contain;
+    max-width: 8rem;
+    
+  }
+  .caption{
+    padding: 1rem;
   }
 
 </style>
