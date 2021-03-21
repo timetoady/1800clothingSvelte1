@@ -1,7 +1,7 @@
 <script>
 import { Nav, NavItem} from 'sveltestrap';
 import Fa from 'svelte-fa'
-import { faDownload, faInfo } from '@fortawesome/free-solid-svg-icons'
+import { faDownload } from '@fortawesome/free-solid-svg-icons'
 let pdfPreview = "defaultView.pdf";
 $: pdfURL = `./assets/pdfs/${pdfPreview}`
 const handleViewerUpdate = (url) => {
@@ -23,40 +23,47 @@ const handleViewerUpdate = (url) => {
     <h5 >The Book</h5>
     <Nav vertical>
         <NavItem   >
-           <p on:click={() => handleViewerUpdate("1800-1819.pdf")}>
+           <label on:click={() => handleViewerUpdate("1800-1819.pdf")}>
             1800-1819
-           </p> 
+            <input type="radio" name="chapter">
+           </label> 
         </NavItem>
         <NavItem value="1820-1829.pdf" >
-            <p on:click={() => handleViewerUpdate("1820-1829.pdf")}>
+            <label  on:click={() => handleViewerUpdate("1820-1829.pdf")}>
                 1820-1829
-               </p> 
+                <input type="radio" name="chapter">
+            </label> 
         </NavItem>
         <NavItem >
-            <p on:click={() => handleViewerUpdate("1830s.pdf")}>
+            <label on:click={() => handleViewerUpdate("1830s.pdf")}>
                 1830-1839
-               </p> 
+                <input type="radio" name="chapter">
+               </label> 
         </NavItem>
         <NavItem >
-            <p on:click={() => handleViewerUpdate("1840s.pdf")}>
+            <label on:click={() => handleViewerUpdate("1840s.pdf")}>
                 1840-1849
-               </p> 
+                <input type="radio" name="chapter">
+            </label> 
             
         </NavItem>
         <NavItem>
-            <p on:click={() => handleViewerUpdate("1850s.pdf")}>
+            <label on:click={() => handleViewerUpdate("1850s.pdf")}>
                 1850-1859
-               </p> 
+                <input type="radio" name="chapter">
+            </label> 
         </NavItem>
         <NavItem>
-            <p on:click={() => handleViewerUpdate("1860s.pdf")}>
+            <label on:click={() => handleViewerUpdate("1860s.pdf")}>
                 1860-1869
-               </p> 
+                <input type="radio" name="chapter">
+            </label> 
         </NavItem>
         <NavItem>
-            <p on:click={() => handleViewerUpdate("1870s.pdf")}>
+            <label on:click={() => handleViewerUpdate("1870s.pdf")}>
                 1870-1879
-               </p> 
+                <input type="radio" name="chapter">
+            </label> 
         </NavItem>
     </Nav>
 </div>
@@ -64,7 +71,7 @@ const handleViewerUpdate = (url) => {
 
 
 <div class="bookBox">
-    <a class="download" href={pdfURL} download> <Fa icon={faDownload}/> Download Book</a>
+    <a class="download" href={pdfURL} download>Download Chapter <Fa icon={faDownload}/></a>
 </div>
 <div class="viewerBox">
     <iframe title="PDFviewer" src={pdfURL}></iframe>
@@ -79,7 +86,6 @@ const handleViewerUpdate = (url) => {
    
 }
 .navigation {
-    
     min-width: 12rem;
     border-right: 1px solid rgba(128, 128, 128, 0.5);
     background-color: #ddd;

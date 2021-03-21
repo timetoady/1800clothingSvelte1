@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<link rel="stylesheet" href="compStyles.css">
+	
   <style>
     body {
       margin: 0;
@@ -27,7 +27,7 @@
 		</div>
       <nav>
         <!-- <Link to="/"><button>Home</button></Link> -->
-        <Link to="book"><button>View the Book</button></Link>
+        <Link to="book"><button class="viewButton">View the Book</button></Link>
       </nav>
     </Router>
   </header>
@@ -68,5 +68,10 @@
     padding: 0;
     margin: 0;
   }
-
+  .viewButton{
+	  border-radius: 20px;
+	  color: white;
+	  background-color: #333;
+	  padding: .25rem .7rem;
+  }
 </style>

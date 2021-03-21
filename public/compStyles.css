@@ -5,6 +5,6 @@ li.nav-item{
     cursor: pointer;
  }
 
- li.nav-item p {
+ li.nav-item p, li.nav-item label {
      margin: 0;
  }
