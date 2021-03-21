@@ -1,13 +1,20 @@
 <script>
-  import { Nav, NavItem, Collapse, UncontrolledCollapse } from "sveltestrap";
+  import { onMount } from "svelte";
+  import { Nav, NavItem, Collapse, UncontrolledCollapse, Card, CardBody, CardFooter } from "sveltestrap";
   import Fa from "svelte-fa";
   import { faFilter } from "@fortawesome/free-solid-svg-icons";
+  import { paginate, LightPaginationNav } from "svelte-paginate";
+  import { costumeList } from "./stores";
   let isOpen = false;
+  let items = $costumeList;
+  let currentPage = 1;
+  let pageSize = 6;
+  $: paginatedItems = paginate({ items, pageSize, currentPage });
 
   //next: figure out how to do pagenated list of costumes/lazy load. Set costumes.json as store
   // Set up dynamic modal for when costume cards are clicked
   // Set up search and filters to alter what appears? May have to wait until API hookup
-  
+  //onMount(console.log($costumeList))
 </script>
 
 <svelte:head>
@@ -139,7 +146,43 @@
       </form>
     </Nav>
   </div>
-  <div class="costumeGrid">Costume Grid Here</div>
+  <div>
+    <ul class="items costumeGrid">
+      {#each paginatedItems as item}
+        <li class="item">
+          <Card>
+            <CardBody>
+              {item.caption}
+            </CardBody>
+            <CardFooter>
+              <button>
+                {item.pdf}
+              </button>
+              <button>
+                {item.person}
+              </button>
+              <button>
+                {item.class}
+              </button>
+              <button>
+                {item.clothing}
+              </button>
+            </CardFooter>
+          </Card>
+          
+        </li>
+      {/each}
+    </ul>
+
+    <LightPaginationNav
+      totalItems={items.length}
+      {pageSize}
+      {currentPage}
+      limit={2}
+      showStepOptions={true}
+      on:setPage={(e) => (currentPage = e.detail.page)}
+    />
+  </div>
 </div>
 
 <style>
@@ -162,4 +205,23 @@
   .collapsed {
     border-bottom: 1px solid rgba(128, 128, 128, 0.5);
   }
+  .costumeGrid{
+    display: grid;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr ;
+
+    
+  }
+  .item{
+    list-style: none;
+    /* max-width: 10rem; */
+  }
+  .item button{
+    border-radius: 20px;
+    background-color: #fff;
+    padding: .25rem .7rem;
+  }
+
 </style>

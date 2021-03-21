@@ -2,3 +2,11 @@ li.nav-item {
     padding: 0.25rem 0.75rem;
     cursor: pointer;
 }
+
+div.card-body{
+    background-color: #f4f4f4;
+}
+
+div.card-footer{
+    background-color: #f4f4f4;
+  }
