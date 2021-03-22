@@ -1,26 +1,27 @@
-li.nav-item{
-    padding: .5rem  .75rem;
+li.nav-item {
+    padding: .5rem .75rem;
     align-items: center;
     border-bottom: 1px solid rgba(128, 128, 128, 0.5);
     cursor: pointer;
- }
+}
 
- li.nav-item p, li.nav-item label {
-     margin: 0;
- }
+li.nav-item p,
+li.nav-item label {
+    margin: 0;
+}
 
- @media screen and (max-width: 900px) {
-    li.nav-item{
-        padding: .5rem  .5rem;
+@media screen and (max-width: 900px) {
+    li.nav-item {
+        padding: .5rem .5rem;
         text-align: center;
-        
-       
-     }
 
-     @media screen and (max-width: 600px) {
-        li.nav-item{
-            padding: .5rem  .5rem;
-            text-align: center;
-           
-         }
- }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    li.nav-item {
+        padding: .5rem .5rem;
+        text-align: center;
+
+    }
+}
