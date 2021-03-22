@@ -368,7 +368,7 @@ InputGroup,
     isOpen={gridModalOpen}
     toggle={handleModal}
     size="lg"
-    style="max-height: 90vh"
+    
   >
     <ModalHeader toggle={handleModal}>{$currentCostume.caption}</ModalHeader>
     <ModalBody>
