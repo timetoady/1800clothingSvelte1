@@ -398,7 +398,7 @@ InputGroup,
   <div class="float">
     <Button color="secondary" on:click={toggle2}>About</Button>
     <Modal isOpen={isOpen2} toggle={toggle2} size="lg">
-      <ModalHeader toggle={toggle2}>About</ModalHeader>
+      <ModalHeader toggle={toggle2}>About 1800's Clothing</ModalHeader>
       <ModalBody>
         <div class="overflow-auto aboutDiv">
           <div>
@@ -524,8 +524,6 @@ InputGroup,
 
   .float {
     position: fixed;
-    /* width: 60px;
-    height: 60px; */
     bottom: 40px;
     right: 20px;
     
@@ -545,6 +543,15 @@ InputGroup,
     .cardModalBody {
       flex-direction: column;
     }
+    .aboutDiv{
+    flex-direction: column;  
+  }
+  .aboutDiv img {
+    display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+  }
   }
 
   @media screen and (max-width: 700px) {
@@ -585,5 +592,6 @@ InputGroup,
       padding: 0.2rem 0.4rem;
       margin-bottom: 0.2rem;
     }
+
   }
 </style>
