@@ -20,6 +20,8 @@
   import { costumeList, currentCostume } from "./stores";
 
   let isOpen = false;
+  let isOpen2 = false;
+  let isOpen3 = false;
   let items = $costumeList;
   let currentPage = 1;
   let pageSize = 6;
@@ -31,6 +33,9 @@
   let modalSource;
   let modalImg;
   let gridModalOpen = false;
+  const small = 700
+  const medium = 900
+  let w;
   const handleModal = (id) => {
     //replace this with an async await when on a db
     let current = $costumeList.filter((costume) => {
@@ -42,6 +47,7 @@
   };
   const toggleModal = () => {
     gridModalOpen = !gridModalOpen;
+    console.log(w)
   };
   const toggle = () => {
     gridModalOpen = !gridModalOpen;
@@ -61,17 +67,142 @@
   <link rel="stylesheet" href="landingStyles.css" />
 </svelte:head>
 
+<svelte:window bind:innerWidth={w}/>
+
 <div class="landing">
   <div class="filters">
+    {#if w > small}
     <h5>Filters <Fa icon={faFilter} /></h5>
+    {/if}
     <Nav vertical>
+      {#if w <= small}
       <form>
         <div class="collapseContainer">
           <div class="collapsed">
             <input class="searchBox" type="text" placeholder="Search..." />
 
             <div on:click={() => (isOpen = !isOpen)}>
-              <NavItem>Date Range</NavItem>
+              <NavItem >Filters <Fa icon={faFilter} /></NavItem>
+            </div>
+
+            <Collapse {isOpen}>
+              <NavItem >Date Range</NavItem>
+              <NavItem>
+                <label>
+                  <input type="checkbox" checked />
+                  1800-1819
+                </label>
+              </NavItem>
+              <NavItem>
+                <label>
+                  <input type="checkbox" checked />
+                  1820-1829
+                </label>
+              </NavItem>
+              <NavItem>
+                <label>
+                  <input type="checkbox" checked />
+                  1830-1839
+                </label></NavItem
+              >
+              <NavItem>
+                <label>
+                  <input type="checkbox" checked />
+                  1840-1849
+                </label>
+              </NavItem>
+              <NavItem>
+                <label>
+                  <input type="checkbox" checked />
+                  1850-1859
+                </label>
+              </NavItem>
+              <NavItem>
+                <label>
+                  <input type="checkbox" checked />
+                  1860-1869
+                </label>
+              </NavItem>
+              <NavItem>
+                <label>
+                  <input type="checkbox" checked />
+                  1870-1879
+                </label>
+              </NavItem>
+            </Collapse>
+          </div>
+
+          <div class="collapsed">
+            <!-- <div on:click={() => (isOpen = !isOpen)}>
+              <NavItem>Group</NavItem>
+            </div> -->
+
+            <Collapse {isOpen}>
+              <NavItem >Group</NavItem>
+              <NavItem
+                ><label>
+                  <input type="checkbox" checked />
+                  Women
+                </label>
+              </NavItem>
+              <NavItem
+                ><label>
+                  <input type="checkbox" checked />
+                  Men
+                </label>
+              </NavItem>
+              <NavItem
+                ><label>
+                  <input type="checkbox" checked />
+                  Children
+                </label>
+              </NavItem>
+            </Collapse>
+          </div>
+
+          <div class="collapsed">
+            <!-- <div on:click={() => (isOpen = !isOpen)}>
+              <NavItem>Category</NavItem>
+            </div> -->
+
+            <Collapse {isOpen}>
+              <NavItem>Category</NavItem>
+              <NavItem
+                ><label>
+                  <input type="checkbox" checked />
+                  Costume
+                </label></NavItem
+              >
+              <NavItem
+                ><label>
+                  <input type="checkbox" checked />
+                  Garment
+                </label></NavItem
+              >
+              <NavItem
+                ><label>
+                  <input type="checkbox" checked />
+                  Hairstyle
+                </label></NavItem
+              >
+              <NavItem
+                ><label>
+                  <input type="checkbox" checked />
+                  Accessory
+                </label></NavItem
+              >
+            </Collapse>
+          </div>
+        </div>
+      </form>
+      {:else}
+      <form>
+        <div class="collapseContainer">
+          <div class="collapsed">
+            <input class="searchBox" type="text" placeholder="Search..." />
+
+            <div on:click={() => (isOpen = !isOpen)}>
+              <NavItem >Date Range</NavItem>
             </div>
 
             <Collapse {isOpen}>
@@ -180,6 +311,8 @@
           </div>
         </div>
       </form>
+      {/if}
+      
     </Nav>
   </div>
   <div>
@@ -324,7 +457,7 @@
   }
 
   .overflow-auto {
-    max-height: 65vh;
+    max-height: 60vh;
     margin-top: 0.25rem;
   }
 
@@ -368,6 +501,12 @@
     }
     .cardModalBody p{
     font-size: .8rem;
+  }
+  .item button {
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 0.2rem 0.4rem;
+    margin-bottom: .2rem;
   }
   }
 </style>
