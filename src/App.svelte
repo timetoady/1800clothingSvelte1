@@ -3,7 +3,6 @@
   import Landing from "./Landing.svelte";
   import Book from "./Book.svelte";
   export let url = "";
-  export let name;
 </script>
 
 <svelte:head>
