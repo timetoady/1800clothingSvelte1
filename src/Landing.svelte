@@ -1,4 +1,5 @@
 <script>
+  //next, add form binding to variables, then a $ object that updates with those, to use in filter to render objects.
   import { onMount } from "svelte";
   import {
     Nav,
