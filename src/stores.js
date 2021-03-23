@@ -4,5 +4,5 @@ import costumes from '../public/assets/costumes.json';
 
 
 
-export const costumeList = readable(costumes);
+export const costumeList = writable(costumes);
 export const currentCostume = writable([])

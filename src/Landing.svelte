@@ -14,16 +14,19 @@
     ModalBody,
     ModalFooter,
     Button,
-InputGroup,
+    InputGroup,
   } from "sveltestrap";
   import Fa from "svelte-fa";
   import { faFilter } from "@fortawesome/free-solid-svg-icons";
   import { paginate, LightPaginationNav } from "svelte-paginate";
   import { costumeList, currentCostume } from "./stores";
 
+  //Modal openers
   let isOpen = false;
   let isOpen2 = false;
   let items = $costumeList;
+
+  //Paging parts
   let currentPage = 1;
   let pageSize = 6;
   $: paginatedItems = paginate({ items, pageSize, currentPage });
@@ -34,9 +37,77 @@ InputGroup,
   let modalSource;
   let modalImg;
   let gridModalOpen = false;
+  //Screen sizes
   const small = 700;
   const medium = 900;
   let w;
+  //Search and filters
+  let searchTerm = "";
+  //let searchResult = [];
+  let datePeriod1 = true;
+  let datePeriod2 = true;
+  let datePeriod3 = true;
+  let datePeriod4 = true;
+  let datePeriod5 = true;
+  let datePeriod6 = true;
+  let datePeriod7 = true;
+  let women = true;
+  let men = true;
+  let children = true;
+  let costume = true;
+  let garment = true;
+  let hairstyle = true;
+  let accessory = true;
+
+  // let theFilters = [
+  //   "1800",
+  //   "1820",
+  //   "1830",
+  //   "1840",
+  //   "1850",
+  //   "1860",
+  //   "1870",
+  //   "women",
+  //   "men",
+  //   "children",
+  //   "costume",
+  //   "garment",
+  //   "hairstyle",
+  //   "accessory",
+  // ];
+  // const checkStuff = () =>{
+  //   console.log("Searchterm", searchTerm)
+  // }
+
+  const searchFilter = () => {
+    console.log("Search term is:", searchTerm);
+    console.log($costumeList);
+    let searchResult = [];
+    //filter by check boxes first. Or rather, have them alter items to remove search initially?
+    // let searchResult = $costumeList.filter((entry) => {
+    //   if (Object.values(entry).includes(searchTerm)) {
+    //     return entry
+    //   };
+    // });
+    for (const entry of $costumeList) {
+      items = $costumeList
+      if (
+        entry.caption.toLowerCase().trim().includes(searchTerm.toLowerCase().trim()) ||
+        entry.person.toLowerCase().trim().includes(searchTerm.toLowerCase().trim()) ||
+        entry.class.toLowerCase().trim().includes(searchTerm.toLowerCase().trim()) ||
+        entry.clothing.toLowerCase().trim().includes(searchTerm.toLowerCase().trim()) ||
+        entry.pdf == searchTerm
+      ) {
+        searchResult.push(entry);
+      }
+    }
+    items = searchResult;
+    // checkStuff()
+  };
+
+  const handleFilter = () => {
+    console.log("Filter clicked!");
+  };
   const handleModal = (id) => {
     //replace this with an async await when on a db
     let current = $costumeList.filter((costume) => {
@@ -55,9 +126,11 @@ InputGroup,
   };
 
   const toggle2 = () => (isOpen2 = !isOpen2);
+  const clearResults = () => {
+    console.log("Changing!")
+    searchTerm.trim() === "" ? items = $costumeList : null
+  }
 
-  //next: figure out how to do pagenated list of costumes/lazy load. Set costumes.json as store
-  // Set up dynamic modal for when costume cards are clicked
   // Set up search and filters to alter what appears? May have to wait until API hookup
   //onMount(console.log($costumeList))
 </script>
@@ -82,7 +155,13 @@ InputGroup,
         <form>
           <div class="collapseContainer">
             <div class="collapsed">
-              <input class="searchBox" type="text" placeholder="Search..." />
+              <input
+                bind:value={searchTerm}
+                on:change={searchFilter}
+                class="searchBox"
+                type="text"
+                placeholder="Search..."
+              />
 
               <div on:click={() => (isOpen = !isOpen)}>
                 <NavItem>Filters <Fa icon={faFilter} /></NavItem>
@@ -91,44 +170,44 @@ InputGroup,
               <Collapse {isOpen}>
                 <NavItem>Date Range</NavItem>
                 <NavItem>
-                  <label>
-                    <input type="checkbox" checked />
+                  <label on:click={handleFilter}>
+                    <input bind:value={datePeriod1} type="checkbox" checked />
                     1800-1819
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod2} type="checkbox" checked />
                     1820-1829
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod3} type="checkbox" checked />
                     1830-1839
                   </label></NavItem
                 >
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod4} type="checkbox" checked />
                     1840-1849
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod5} type="checkbox" checked />
                     1850-1859
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod6} type="checkbox" checked />
                     1860-1869
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod7} type="checkbox" checked />
                     1870-1879
                   </label>
                 </NavItem>
@@ -144,19 +223,19 @@ InputGroup,
                 <NavItem>Group</NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={women} />
                     Women
                   </label>
                 </NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={men} />
                     Men
                   </label>
                 </NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={children} />
                     Children
                   </label>
                 </NavItem>
@@ -172,25 +251,25 @@ InputGroup,
                 <NavItem>Category</NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={costume} />
                     Costume
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={garment} />
                     Garment
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={hairstyle} />
                     Hairstyle
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={accessory} />
                     Accessory
                   </label></NavItem
                 >
@@ -199,55 +278,61 @@ InputGroup,
           </div>
         </form>
       {:else}
-        <form>
+        <form on:submit|preventDefault={searchFilter}>
           <div class="collapseContainer">
             <div class="collapsed">
-              <input class="searchBox" type="text" placeholder="Search..." />
-
+              <input
+                bind:value={searchTerm}
+                on:change={clearResults}
+                class="searchBox"
+                type="text"
+                placeholder="Search..."
+              />
+              
               <div on:click={() => (isOpen = !isOpen)}>
                 <NavItem>Date Range</NavItem>
               </div>
 
               <Collapse {isOpen}>
                 <NavItem>
-                  <label>
-                    <input type="checkbox" checked />
+                  <label on:click={handleFilter}>
+                    <input bind:value={datePeriod1} type="checkbox" checked />
                     1800-1819
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod2} type="checkbox" checked />
                     1820-1829
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod3} type="checkbox" checked />
                     1830-1839
                   </label></NavItem
                 >
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod4} type="checkbox" checked />
                     1840-1849
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod5} type="checkbox" checked />
                     1850-1859
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod6} type="checkbox" checked />
                     1860-1869
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input type="checkbox" checked />
+                    <input bind:value={datePeriod7} type="checkbox" checked />
                     1870-1879
                   </label>
                 </NavItem>
@@ -262,19 +347,19 @@ InputGroup,
               <UncontrolledCollapse toggler="#toggler">
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={women} />
                     Women
                   </label>
                 </NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={men} />
                     Men
                   </label>
                 </NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={children} />
                     Children
                   </label>
                 </NavItem>
@@ -288,25 +373,25 @@ InputGroup,
               <UncontrolledCollapse toggler="#toggler2">
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={costume} />
                     Costume
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={garment} />
                     Garment
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={hairstyle} />
                     Hairstyle
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked bind:value={accessory} />
                     Accessory
                   </label></NavItem
                 >
@@ -316,6 +401,7 @@ InputGroup,
         </form>
       {/if}
     </Nav>
+    
   </div>
   <div>
     <ul class="items costumeGrid">
@@ -365,12 +451,7 @@ InputGroup,
     />
   </div>
   <!-- Dynamic grid tile modal -->
-  <Modal
-    isOpen={gridModalOpen}
-    toggle={handleModal}
-    size="lg"
-    
-  >
+  <Modal isOpen={gridModalOpen} toggle={handleModal} size="lg">
     <ModalHeader toggle={handleModal}>{$currentCostume.caption}</ModalHeader>
     <ModalBody>
       <div class="cardModalBody">
@@ -404,52 +485,53 @@ InputGroup,
         <div class="overflow-auto aboutDiv">
           <div>
             <img
-            src="assets/carma.jpg"
-            alt="Carma de Jong Anderson"
-            loading="lazy"
-          />
-        </div>
-        
+              src="assets/carma.jpg"
+              alt="Carma de Jong Anderson"
+              loading="lazy"
+            />
+          </div>
 
-        <div>
-          <p>
-            All her life, Carma de Jong Anderson was fascinated with historical
-            costumes. As she grew to maturity, her interest focused on clothing of
-            the 1800s. On numerous occasions she was asked by the Church of Jesus
-            Christ of Latter Day Saints to consult with them on the restoration of
-            historic sites of the Church, and the dressing of the docents there
-            who represented families of those decades. Unfortunately, modern
-            artists are not very familiar with authentic clothing worn by the
-            people of the 1800s. Their paintings and illustrations often depict
-            wild guesses as to what was worn.
-          </p>
-          <p>
-            So Carma took it upon herself for over 40 years to travel extensively
-            to museums, art galleries, historic sites, and to pour through images
-            in antique books and magazines collecting detailed images of what
-            people in the 1800s really wore. She earned a Ph.D. at BYU with a
-            large, 3 volume doctoral dissertation showing what she had learned.
-            Limited to a printing of only 6 three-volume copies, It was much in
-            demand with artists in and outside of the Church of Jesus Christ LDS.
-            She was asked to update it, enlarge it, and eventually put it online
-            so anyone in the world could see the results of her decades of
-            research, showing over 2000 images of correct clothing for each decade
-            from the late 1820s to the 1870s.
-          </p>
-          <p>
-            This particular file deals with the 1829s to 1849s, when
-            illustrations, paintings, and daguerreotypes were almost the only
-            methods of visual recording from 1830 to 1860 when better means of
-            photography became available. Each decade in this file begins with
-            images of men and families, then women, then children, from basic
-            clothing to hair styles to accessories. Each category begins with
-            fashions of ordinary, laboring people, then of wealthier people. When
-            all categories have been added to the website, anyone, anywhere will
-            have access to authentic images of clothing of much of the 1800s.
-          </p>
+          <div>
+            <p>
+              All her life, Carma de Jong Anderson was fascinated with
+              historical costumes. As she grew to maturity, her interest focused
+              on clothing of the 1800s. On numerous occasions she was asked by
+              the Church of Jesus Christ of Latter Day Saints to consult with
+              them on the restoration of historic sites of the Church, and the
+              dressing of the docents there who represented families of those
+              decades. Unfortunately, modern artists are not very familiar with
+              authentic clothing worn by the people of the 1800s. Their
+              paintings and illustrations often depict wild guesses as to what
+              was worn.
+            </p>
+            <p>
+              So Carma took it upon herself for over 40 years to travel
+              extensively to museums, art galleries, historic sites, and to pour
+              through images in antique books and magazines collecting detailed
+              images of what people in the 1800s really wore. She earned a Ph.D.
+              at BYU with a large, 3 volume doctoral dissertation showing what
+              she had learned. Limited to a printing of only 6 three-volume
+              copies, It was much in demand with artists in and outside of the
+              Church of Jesus Christ LDS. She was asked to update it, enlarge
+              it, and eventually put it online so anyone in the world could see
+              the results of her decades of research, showing over 2000 images
+              of correct clothing for each decade from the late 1820s to the
+              1870s.
+            </p>
+            <p>
+              This particular file deals with the 1829s to 1849s, when
+              illustrations, paintings, and daguerreotypes were almost the only
+              methods of visual recording from 1830 to 1860 when better means of
+              photography became available. Each decade in this file begins with
+              images of men and families, then women, then children, from basic
+              clothing to hair styles to accessories. Each category begins with
+              fashions of ordinary, laboring people, then of wealthier people.
+              When all categories have been added to the website, anyone,
+              anywhere will have access to authentic images of clothing of much
+              of the 1800s.
+            </p>
+          </div>
         </div>
-      
-      </div>
       </ModalBody>
       <ModalFooter>
         <Button color="secondary" on:click={toggle2}>CLOSE</Button>
@@ -527,15 +609,13 @@ InputGroup,
     position: fixed;
     bottom: 40px;
     right: 20px;
-    
   }
-  .aboutDiv{
-    display: flex;    
+  .aboutDiv {
+    display: flex;
   }
-  .aboutDiv div{
-    padding: .5rem;
+  .aboutDiv div {
+    padding: 0.5rem;
   }
-
 
   @media screen and (max-width: 900px) {
     .costumeGrid {
@@ -544,15 +624,15 @@ InputGroup,
     .cardModalBody {
       flex-direction: column;
     }
-    .aboutDiv{
-    flex-direction: column;  
-  }
-  .aboutDiv img {
-    display: block;
+    .aboutDiv {
+      flex-direction: column;
+    }
+    .aboutDiv img {
+      display: block;
       margin-left: auto;
       margin-right: auto;
       width: 50%;
-  }
+    }
   }
 
   @media screen and (max-width: 700px) {
@@ -593,6 +673,5 @@ InputGroup,
       padding: 0.2rem 0.4rem;
       margin-bottom: 0.2rem;
     }
-
   }
 </style>
