@@ -44,20 +44,20 @@
   //Search and filters
   let searchTerm = "";
   //let searchResult = [];
-  let datePeriod1 = true;
-  let datePeriod2 = true;
-  let datePeriod3 = true;
-  let datePeriod4 = true;
-  let datePeriod5 = true;
-  let datePeriod6 = true;
-  let datePeriod7 = true;
-  let women = true;
-  let men = true;
-  let children = true;
-  let costume = true;
-  let garment = true;
-  let hairstyle = true;
-  let accessory = true;
+  let datePeriod1 = false;
+  let datePeriod2 = false;
+  let datePeriod3 = false;
+  let datePeriod4 = false;
+  let datePeriod5 = false;
+  let datePeriod6 = false;
+  let datePeriod7 = false;
+  let women = false;
+  let men = false;
+  let children = false;
+  let costume = false;
+  let garment = false;
+  let hairstyle = false;
+  let accessory = false;
 
   // let theFilters = [
   //   "1800",
@@ -83,19 +83,31 @@
     console.log("Search term is:", searchTerm);
     console.log($costumeList);
     let searchResult = [];
-    //filter by check boxes first. Or rather, have them alter items to remove search initially?
+    //filter by check boxes first.
     // let searchResult = $costumeList.filter((entry) => {
     //   if (Object.values(entry).includes(searchTerm)) {
     //     return entry
     //   };
     // });
     for (const entry of $costumeList) {
-      items = $costumeList
+      items = $costumeList;
       if (
-        entry.caption.toLowerCase().trim().includes(searchTerm.toLowerCase().trim()) ||
-        entry.person.toLowerCase().trim().includes(searchTerm.toLowerCase().trim()) ||
-        entry.class.toLowerCase().trim().includes(searchTerm.toLowerCase().trim()) ||
-        entry.clothing.toLowerCase().trim().includes(searchTerm.toLowerCase().trim()) ||
+        entry.caption
+          .toLowerCase()
+          .trim()
+          .includes(searchTerm.toLowerCase().trim()) ||
+        entry.person
+          .toLowerCase()
+          .trim()
+          .includes(searchTerm.toLowerCase().trim()) ||
+        entry.class
+          .toLowerCase()
+          .trim()
+          .includes(searchTerm.toLowerCase().trim()) ||
+        entry.clothing
+          .toLowerCase()
+          .trim()
+          .includes(searchTerm.toLowerCase().trim()) ||
         entry.pdf == searchTerm
       ) {
         searchResult.push(entry);
@@ -125,11 +137,11 @@
     gridModalOpen = !gridModalOpen;
   };
 
-  const toggle2 = () => (isOpen2 = !isOpen2);
+  export const toggle2 = () => (isOpen2 = !isOpen2);
   const clearResults = () => {
-    console.log("Changing!")
-    searchTerm.trim() === "" ? items = $costumeList : null
-  }
+    console.log("Changing!");
+    searchTerm.trim() === "" ? (items = $costumeList) : null;
+  };
 
   // Set up search and filters to alter what appears? May have to wait until API hookup
   //onMount(console.log($costumeList))
@@ -171,43 +183,43 @@
                 <NavItem>Date Range</NavItem>
                 <NavItem>
                   <label on:click={handleFilter}>
-                    <input bind:value={datePeriod1} type="checkbox" checked />
+                    <input bind:value={datePeriod1} type="checkbox" />
                     1800-1819
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod2} type="checkbox" checked />
+                    <input bind:value={datePeriod2} type="checkbox" />
                     1820-1829
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod3} type="checkbox" checked />
+                    <input bind:value={datePeriod3} type="checkbox" />
                     1830-1839
                   </label></NavItem
                 >
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod4} type="checkbox" checked />
+                    <input bind:value={datePeriod4} type="checkbox" />
                     1840-1849
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod5} type="checkbox" checked />
+                    <input bind:value={datePeriod5} type="checkbox" />
                     1850-1859
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod6} type="checkbox" checked />
+                    <input bind:value={datePeriod6} type="checkbox" />
                     1860-1869
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod7} type="checkbox" checked />
+                    <input bind:value={datePeriod7} type="checkbox" />
                     1870-1879
                   </label>
                 </NavItem>
@@ -223,19 +235,19 @@
                 <NavItem>Group</NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={women} />
+                    <input type="checkbox" bind:value={women} />
                     Women
                   </label>
                 </NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={men} />
+                    <input type="checkbox" bind:value={men} />
                     Men
                   </label>
                 </NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={children} />
+                    <input type="checkbox" bind:value={children} />
                     Children
                   </label>
                 </NavItem>
@@ -251,25 +263,25 @@
                 <NavItem>Category</NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={costume} />
+                    <input type="checkbox" bind:value={costume} />
                     Costume
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={garment} />
+                    <input type="checkbox" bind:value={garment} />
                     Garment
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={hairstyle} />
+                    <input type="checkbox" bind:value={hairstyle} />
                     Hairstyle
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={accessory} />
+                    <input type="checkbox" bind:value={accessory} />
                     Accessory
                   </label></NavItem
                 >
@@ -278,17 +290,9 @@
           </div>
         </form>
       {:else}
-        <form on:submit|preventDefault={searchFilter}>
+        <form>
           <div class="collapseContainer">
             <div class="collapsed">
-              <input
-                bind:value={searchTerm}
-                on:change={clearResults}
-                class="searchBox"
-                type="text"
-                placeholder="Search..."
-              />
-              
               <div on:click={() => (isOpen = !isOpen)}>
                 <NavItem>Date Range</NavItem>
               </div>
@@ -296,43 +300,43 @@
               <Collapse {isOpen}>
                 <NavItem>
                   <label on:click={handleFilter}>
-                    <input bind:value={datePeriod1} type="checkbox" checked />
+                    <input bind:value={datePeriod1} type="checkbox" />
                     1800-1819
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod2} type="checkbox" checked />
+                    <input bind:value={datePeriod2} type="checkbox" />
                     1820-1829
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod3} type="checkbox" checked />
+                    <input bind:value={datePeriod3} type="checkbox" />
                     1830-1839
                   </label></NavItem
                 >
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod4} type="checkbox" checked />
+                    <input bind:value={datePeriod4} type="checkbox" />
                     1840-1849
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod5} type="checkbox" checked />
+                    <input bind:value={datePeriod5} type="checkbox" />
                     1850-1859
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod6} type="checkbox" checked />
+                    <input bind:value={datePeriod6} type="checkbox" />
                     1860-1869
                   </label>
                 </NavItem>
                 <NavItem>
                   <label>
-                    <input bind:value={datePeriod7} type="checkbox" checked />
+                    <input bind:value={datePeriod7} type="checkbox" />
                     1870-1879
                   </label>
                 </NavItem>
@@ -347,19 +351,19 @@
               <UncontrolledCollapse toggler="#toggler">
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={women} />
+                    <input type="checkbox" bind:value={women} />
                     Women
                   </label>
                 </NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={men} />
+                    <input type="checkbox" bind:value={men} />
                     Men
                   </label>
                 </NavItem>
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={children} />
+                    <input type="checkbox" bind:value={children} />
                     Children
                   </label>
                 </NavItem>
@@ -373,25 +377,25 @@
               <UncontrolledCollapse toggler="#toggler2">
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={costume} />
+                    <input type="checkbox" bind:value={costume} />
                     Costume
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={garment} />
+                    <input type="checkbox" bind:value={garment} />
                     Garment
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={hairstyle} />
+                    <input type="checkbox" bind:value={hairstyle} />
                     Hairstyle
                   </label></NavItem
                 >
                 <NavItem
                   ><label>
-                    <input type="checkbox" checked bind:value={accessory} />
+                    <input type="checkbox" bind:value={accessory} />
                     Accessory
                   </label></NavItem
                 >
@@ -401,10 +405,18 @@
         </form>
       {/if}
     </Nav>
-    
   </div>
-  <div>
-    <ul class="items costumeGrid">
+  <div id="paginationDiv" class="overflow-auto">
+    <form on:submit|preventDefault={searchFilter}>
+      <input
+        bind:value={searchTerm}
+        on:change={clearResults}
+        class="searchBox"
+        type="text"
+        placeholder="Search..."
+      />
+    </form>
+    <ul class="items costumeGrid ">
       {#each paginatedItems as item}
         <li class="item">
           <Card>
@@ -417,7 +429,7 @@
                     loading="lazy"
                   />
                 </div>
-                <div class="caption">
+                <div name="cardCaption" class="caption overflow-auto">
                   {item.caption}
                 </div>
               </CardBody>
@@ -440,7 +452,6 @@
         </li>
       {/each}
     </ul>
-
     <LightPaginationNav
       totalItems={items.length}
       {pageSize}
@@ -462,12 +473,16 @@
           />
         </div>
         <div class="modalDetails overflow-auto">
-          <p>
-            <strong>Description: </strong>{$currentCostume.description}
-          </p>
+          {#if $currentCostume.description === ""}
+            {""}
+          {:else}
+            <p>
+              <strong>Description: </strong>{$currentCostume.description}
+            </p>
+          {/if}
           <p>
             <strong>Source: </strong>{$currentCostume.source === ""
-              ? "None"
+              ? "Currently unknown."
               : $currentCostume.source}
           </p>
         </div>
@@ -544,13 +559,13 @@
   .landing {
     padding: 0;
     display: flex;
+    height: 100%;
   }
 
-  .filters {
+  div.filters {
     min-width: 12rem;
     border-right: 1px solid rgba(128, 128, 128, 0.5);
     background-color: #ddd;
-    height: 100vh;
   }
   .filters h5 {
     margin: 0;
@@ -567,6 +582,9 @@
     gap: 10px;
     grid-template-columns: 1fr 1fr;
   }
+  ul.costumeGrid {
+    margin-bottom: 0;
+  }
 
   .item {
     list-style: none;
@@ -579,10 +597,10 @@
   }
   .item img {
     object-fit: contain;
-    max-width: 8rem;
+    max-height: 8rem;
   }
   .caption {
-    padding: 1rem;
+    padding: 0 0 1rem 1rem;
   }
   .cardModalBody {
     display: flex;
@@ -592,17 +610,32 @@
   }
   .cardModalImage img {
     max-width: 100%;
-    max-height: 60vh;
+    max-height: 68vh;
     align-items: center;
     margin: 0 auto;
   }
   .modalDetails {
-    padding: 0.5rem;
+    padding: 0 0.5rem;
+    margin-top: 0 !important;
   }
 
   .overflow-auto {
     max-height: 60vh;
     margin-top: 0.25rem;
+  }
+  #paginationDiv.overflow-auto {
+    max-height: 85vh;
+    margin-top: 0;
+  }
+  div.caption.overflow-auto {
+    max-height: 20vh;
+  }
+  #paginationDiv input {
+    border-radius: 20px;
+    width: 100%;
+  }
+  #paginationDiv form {
+    padding: 1rem 1rem 0 1rem;
   }
 
   .float {
@@ -615,6 +648,12 @@
   }
   .aboutDiv div {
     padding: 0.5rem;
+  }
+
+  @media screen and (min-width: 1400px) {
+    .costumeGrid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 
   @media screen and (max-width: 900px) {
@@ -637,10 +676,14 @@
 
   @media screen and (max-width: 700px) {
     .filters {
-      min-width: 12rem;
+      width: 100%;
       border-right: 1px solid rgba(128, 128, 128, 0.5);
       background-color: #ddd;
       height: unset;
+      position: relative;
+    }
+    .items {
+      margin-left: 0;
     }
     .landing {
       flex-direction: column;
