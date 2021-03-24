@@ -20,6 +20,7 @@
     body {
       margin: 0;
       padding: 0;
+      background-color: #333;
     }
   </style>
 </svelte:head>
@@ -152,6 +153,10 @@
     background-color: unset;
     border: none;
   }
+ footer{
+   background-color: #333;
+   padding: 1rem;
+ }
 
   @media screen and (max-width: 900px) {
     .aboutButton {

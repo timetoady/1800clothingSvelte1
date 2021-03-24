@@ -631,7 +631,7 @@
     max-height: 20vh;
   }
   #paginationDiv input {
-    border-radius: 20px;
+    border-radius: 6px;
     width: 100%;
   }
   #paginationDiv form {
