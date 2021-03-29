@@ -1,7 +1,7 @@
 <script>
   import { Router, Route, Link } from "svelte-routing";
 
-  export let url, toggle;
+  export let url;
 </script>
 
 <header>
@@ -16,10 +16,12 @@
       >
     </div>
     <nav>
-      <button class="aboutButton" color="secondary" on:click={toggle}
-        >About</button
-      >
-      <Link to="book"><button class="viewButton">View the Book</button></Link>
+      <Link to="about">
+        <button class="aboutButton" color="secondary">About</button>
+      </Link>
+      <Link to="book">
+        <button class="viewButton">View the Book</button>
+      </Link>
     </nav>
   </Router>
 </header>
@@ -45,28 +47,20 @@
     border: none;
   }
   .viewButton {
-    border-radius: 20px;
+    border-radius: 8px;
     color: white;
     background-color: #333;
-    padding: 0.25rem 0.7rem;
+    padding: 5px 10px;
   }
 
-  @media screen and (max-width: 900px) {
-    .aboutButton {
-      font-size: 0.7rem;
-    }
-  }
   @media screen and (max-width: 700px) {
     header {
       flex-direction: column;
-      padding-bottom: 0.5rem;
+      padding-bottom: 10px;
     }
     header img {
       width: 100%;
       max-height: none;
-    }
-    .aboutButton {
-      font-size: 1rem;
     }
   }
 </style>
