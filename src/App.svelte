@@ -2,6 +2,7 @@
   import { Router, Route, Link } from "svelte-routing";
   import Landing from "./Landing.svelte";
   import Book from "./Book.svelte";
+  import Nav from "./Nav.svelte";
   import {
     Button,
     Modal,
@@ -25,30 +26,12 @@
   </style>
 </svelte:head>
 
-<div>
-  <header>
-    <Router {url}>
-      <div>
-        <Link to="/"
-          ><img
-            class="title"
-            src="./assets/tempLogo.png"
-            alt="1800clothing.org"
-          /></Link
-        >
-      </div>
-      <nav>
-        <button class="aboutButton" color="secondary" on:click={toggle}
-          >About</button
-        >
-        <Link to="book"><button class="viewButton">View the Book</button></Link>
-      </nav>
-    </Router>
-  </header>
+<div class="App">
+  <Nav {url} {toggle} />
 
   <main>
     <Router {url}>
-      <div>
+      <div class="mainContent">
         <Route path="book" component={Book} />
         <!--for now the router just support case sensitive,
 				  one workaround colud be add two time the route
@@ -121,23 +104,14 @@
 </div>
 
 <style>
-  header {
-    background-color: rgb(216, 216, 216);
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 0.5rem;
+  .App {
+    height: 100%;
   }
-  .title {
-    padding: 0;
-    margin: 0;
+  main {
+    height: calc(100vh - 80px);
   }
-  .viewButton {
-    border-radius: 20px;
-    color: white;
-    background-color: #333;
-    padding: 0.25rem 0.7rem;
+  .mainContent {
+    height: 100%;
   }
   .aboutDiv {
     display: flex;
@@ -149,19 +123,12 @@
     max-height: 50vh;
     margin-top: 0.25rem;
   }
-  .aboutButton {
-    background-color: unset;
-    border: none;
+  footer{
+    background-color: #333;
+    height: 20px;
   }
- footer{
-   background-color: #333;
-   padding: 1rem;
- }
 
   @media screen and (max-width: 900px) {
-    .aboutButton {
-      font-size: 0.7rem;
-    }
     .aboutDiv {
       flex-direction: column;
     }
@@ -170,19 +137,6 @@
       margin-left: auto;
       margin-right: auto;
       width: 50%;
-    }
-  }
-
-  @media screen and (max-width: 700px) {
-    header {
-      flex-direction: column;
-      padding-bottom: 0.5rem;
-    }
-    header img {
-      width: 100%;
-    }
-    .aboutButton {
-      font-size: 1rem;
     }
   }
 </style>

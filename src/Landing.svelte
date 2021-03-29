@@ -564,7 +564,7 @@
     margin-top: 0.25rem;
   }
   #paginationDiv.overflow-auto {
-    max-height: 85vh;
+    max-height: calc(100vh - 80px);
     margin-top: 0;
   }
   div.caption.overflow-auto {
