@@ -33,7 +33,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0.5rem;
+    padding: 0 20px;
   }
   header img {
     max-height: 60px;
@@ -57,10 +57,10 @@
     header {
       flex-direction: column;
       padding-bottom: 10px;
+      height: 97px;
     }
     header img {
-      width: 100%;
-      max-height: none;
+      height: 50px;
     }
   }
 </style>

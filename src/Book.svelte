@@ -84,12 +84,14 @@
 <style>
   .theBook {
     display: flex;
+    height: calc(100vh - 60px);
   }
   .navigation {
-    min-width: 12rem;
+    min-width: 209px;
     border-right: 1px solid rgba(128, 128, 128, 0.5);
     background-color: #ddd;
-    height: 100vh;
+    max-height: calc(100vh - 60px);
+    height: 100%;
   }
   .navigation h5 {
     margin: 0;

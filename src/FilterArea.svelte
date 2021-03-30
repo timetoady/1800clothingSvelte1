@@ -302,7 +302,7 @@
 <style>
 
   div.filters {
-    min-width: 12rem;
+    width: 100%;
     border-right: 1px solid rgba(128, 128, 128, 0.5);
     background-color: #ddd;
   }

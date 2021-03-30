@@ -20,10 +20,10 @@
 </svelte:head>
 
 <div class="App">
-  <Nav {url} />
+  <Nav/>
 
   <main>
-    <Router {url}>
+    <Router>
       <div class="mainContent">
         <!--for now the router just support case sensitive,
 				  one workaround colud be add two time the route
@@ -36,21 +36,31 @@
       </div>
     </Router>
   </main>
-  <footer />
 </div>
 
 <style>
   .App {
     height: 100%;
+    width: 100%;
   }
+  /* there's a weird bug where the   */
   main {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 60px);
+    padding: 0;
+    width: 100%;
   }
   .mainContent {
     height: 100%;
+    width: 100%;
+    padding: 0;
   }
   footer{
     background-color: #333;
     height: 20px;
+  }
+  @media screen and (max-width: 700px) {
+    main {
+      height: calc(100vh - 117px);
+    }
   }
 </style>
