@@ -20,6 +20,7 @@
   import { costumeList, currentCostume } from "./stores";
 
   import FilterArea from './FilterArea.svelte'
+  import CostumeItem from './CostumeItem.svelte'
 
 
   //Modal openers
@@ -135,60 +136,32 @@
 
   <!-- Costume list area -->
   <div id="paginationDiv" class="overflow-auto">
-    <!-- Search Bar -->
-    <form on:submit|preventDefault={searchFilter}>
-      <input
-        bind:value={searchTerm}
-        on:change={clearResults}
-        class="searchBox"
-        type="text"
-        placeholder="Search..."
+    <div class="costumesWrapper">
+      <!-- Search Bar -->
+      <form on:submit|preventDefault={searchFilter}>
+        <input
+          bind:value={searchTerm}
+          on:change={clearResults}
+          class="searchBox"
+          type="text"
+          placeholder="Search..."
+        />
+      </form>
+      <ul class="items costumeGrid ">
+        {#each paginatedItems as item}
+          <CostumeItem {item} {handleModal} {imageSource} />
+        {/each}
+      </ul>
+      <LightPaginationNav
+        totalItems={items.length}
+        {pageSize}
+        {currentPage}
+        limit={2}
+        showStepOptions={true}
+        on:setPage={(e) => (currentPage = e.detail.page)}
       />
-    </form>
-    <ul class="items costumeGrid ">
-      {#each paginatedItems as item}
-        <li class="item">
-          <Card>
-            <div class="modalClick" on:click={() => handleModal(item.id)}>
-              <CardBody>
-                <div>
-                  <img
-                    src="{imageSource}{item.image}"
-                    alt={item.caption}
-                    loading="lazy"
-                  />
-                </div>
-                <div name="cardCaption" class="caption overflow-auto">
-                  {item.caption}
-                </div>
-              </CardBody>
-            </div>
-            <CardFooter>
-              <button>
-                {item.pdf}
-              </button>
-              <button>
-                {item.person}
-              </button>
-              <button>
-                {item.class}
-              </button>
-              <button>
-                {item.clothing}
-              </button>
-            </CardFooter>
-          </Card>
-        </li>
-      {/each}
-    </ul>
-    <LightPaginationNav
-      totalItems={items.length}
-      {pageSize}
-      {currentPage}
-      limit={2}
-      showStepOptions={true}
-      on:setPage={(e) => (currentPage = e.detail.page)}
-    />
+    </div>
+    
   </div>
   <!-- Dynamic grid tile modal -->
   <Modal isOpen={gridModalOpen} toggle={handleModal} size="lg">
@@ -227,42 +200,34 @@
 <style>
   .landing {
     padding: 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: 210px auto;
     height: 100%;
+    width: 100%;
+  }
+
+  .costumesWrapper {
+    max-width: 1265px;
+    margin: 0 auto;
   }
 
   .costumeGrid {
     display: grid;
     flex-wrap: wrap;
     padding: 1rem;
-    gap: 10px;
-    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
   }
   ul.costumeGrid {
     margin-bottom: 0;
   }
 
-  .item {
-    list-style: none;
-    height: 100%;
-  }
-  .item button {
-    border-radius: 20px;
-    background-color: #fff;
-    padding: 0.25rem 0.7rem;
-  }
-  .item img {
-    object-fit: contain;
-    max-height: 8rem;
-  }
-  .caption {
-    padding: 0 0 1rem 1rem;
-  }
   .cardModalBody {
     display: flex;
   }
   .cardModalImage {
     min-width: 15rem;
+    width: 100%;
   }
   .cardModalImage img {
     max-width: 100%;
@@ -280,11 +245,8 @@
     margin-top: 0.25rem;
   }
   #paginationDiv.overflow-auto {
-    max-height: calc(100vh - 80px);
+    max-height: calc(100vh - 60px);
     margin-top: 0;
-  }
-  div.caption.overflow-auto {
-    max-height: 20vh;
   }
   #paginationDiv input {
     border-radius: 6px;
@@ -294,19 +256,16 @@
     padding: 1rem 1rem 0 1rem;
   }
 
-  .float {
-    position: fixed;
-    bottom: 40px;
-    right: 20px;
-  }
-
-  @media screen and (min-width: 1400px) {
+  @media screen and (max-width: 1500px) {
+    .costumesWrapper {
+      max-width: 900px;
+    }
     .costumeGrid {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1065px) {
     .costumeGrid {
       grid-template-columns: 1fr;
     }
@@ -316,39 +275,8 @@
   }
 
   @media screen and (max-width: 700px) {
-    .items {
-      margin-left: 0;
-    }
     .landing {
-      flex-direction: column;
-    }
-    .searchBox {
-      width: 100%;
-    }
-    .item img {
-      width: 100%;
-    }
-    .overflow-auto {
-      max-height: 30vh;
-      margin-top: 0.25rem;
-    }
-    .cardModalImage img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
-    .cardModalImage {
-      min-width: unset !important;
-    }
-    .cardModalBody p {
-      font-size: 0.8rem;
-    }
-    .item button {
-      border-radius: 20px;
-      background-color: #fff;
-      padding: 0.2rem 0.4rem;
-      margin-bottom: 0.2rem;
+      grid-template-columns: 1fr;
     }
   }
 </style>

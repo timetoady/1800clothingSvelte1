@@ -24,6 +24,11 @@ div.card {
     box-shadow: 2px 2px 3px #999;
 }
 
+/* for some reason this only works if there's that weird svelte code appended to .light-pagination-nav */
+.light-pagination-nav.svelte-s5ru8s .pagination-nav {
+    box-shadow: none;
+}
+
 @media screen and (max-width: 900px) {
     div.card-body {
         min-height: 26vh;
