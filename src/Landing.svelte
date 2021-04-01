@@ -21,8 +21,6 @@
   import FilterArea from "./FilterArea.svelte";
   import FilterArea2 from "./FilterArea2.svelte";
   import CostumeItem from "./CostumeItem.svelte";
-
-  //Modal openers
   let items = $costumeList;
 
   //Paging parts
