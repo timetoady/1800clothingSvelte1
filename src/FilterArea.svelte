@@ -25,6 +25,7 @@
     datePeriod5,
     datePeriod6,
     datePeriod7,
+    datePeriod8,
     women,
     men,
     children,
@@ -113,6 +114,12 @@
                 <label>
                   <input bind:value={datePeriod7} type="checkbox" />
                   1870-1879
+                </label>
+              </NavItem>
+              <NavItem>
+                <label>
+                  <input bind:value={datePeriod8} type="checkbox" />
+                  1880-1889
                 </label>
               </NavItem>
             </Collapse>
@@ -230,6 +237,12 @@
                 <label>
                   <input bind:value={datePeriod7} type="checkbox" />
                   1870-1879
+                </label>
+              </NavItem>
+              <NavItem>
+                <label>
+                  <input bind:value={datePeriod8} type="checkbox" />
+                  1880-1889
                 </label>
               </NavItem>
             </Collapse>

@@ -67,12 +67,18 @@
           <input type="radio" name="chapter" />
         </label>
       </NavItem>
+      <NavItem>
+        <label on:click={() => handleViewerUpdate("1880s")}>
+          1880-1889
+          <input type="radio" name="chapter" />
+        </label>
+      </NavItem>
     </Nav>
   </div>
   <div class="viewer">
     <div class="bookBox">
       <a class="download" href={pdfBase + ".pdf"} download
-        >Download Chapter <Fa icon={faDownload} /></a
+        >Download Decade <Fa icon={faDownload} /></a
       >
     </div>
     <div class="viewerBox">
