@@ -16,68 +16,45 @@
     Button,
     InputGroup,
   } from "sveltestrap";
-  import Fa from "svelte-fa";
-  import { faFilter } from "@fortawesome/free-solid-svg-icons";
   import { paginate, LightPaginationNav } from "svelte-paginate";
   import { costumeList, currentCostume } from "./stores";
 
+  import FilterArea from './FilterArea.svelte'
+  import CostumeItem from './CostumeItem.svelte'
+
+
   //Modal openers
-  let isOpen = false;
-  let isOpen2 = false;
   let items = $costumeList;
 
   //Paging parts
   let currentPage = 1;
-  let pageSize = 6;
+  let pageSize = 18;
   $: paginatedItems = paginate({ items, pageSize, currentPage });
   const imageSource = "assets/images/";
+
   //modal items
-  let modalCaption;
-  let modalDesc;
-  let modalSource;
-  let modalImg;
   let gridModalOpen = false;
-  //Screen sizes
-  const small = 700;
-  const medium = 900;
-  let w;
+  
   //Search and filters
   let searchTerm = "";
   //let searchResult = [];
-  let datePeriod1 = false;
-  let datePeriod2 = false;
-  let datePeriod3 = false;
-  let datePeriod4 = false;
-  let datePeriod5 = false;
-  let datePeriod6 = false;
-  let datePeriod7 = false;
-  let women = false;
-  let men = false;
-  let children = false;
-  let costume = false;
-  let garment = false;
-  let hairstyle = false;
-  let accessory = false;
 
-  // let theFilters = [
-  //   "1800",
-  //   "1820",
-  //   "1830",
-  //   "1840",
-  //   "1850",
-  //   "1860",
-  //   "1870",
-  //   "women",
-  //   "men",
-  //   "children",
-  //   "costume",
-  //   "garment",
-  //   "hairstyle",
-  //   "accessory",
-  // ];
-  // const checkStuff = () =>{
-  //   console.log("Searchterm", searchTerm)
-  // }
+  $: params = {
+    datePeriod1: false,
+    datePeriod2: false,
+    datePeriod3: false,
+    datePeriod4: false,
+    datePeriod5: false,
+    datePeriod6: false,
+    datePeriod7: false,
+    women: false,
+    men: false,
+    children: false,
+    costume: false,
+    garment: false,
+    hairstyle: false,
+    accessory: false,
+  };
 
   const searchFilter = () => {
     console.log("Search term is:", searchTerm);
@@ -131,13 +108,11 @@
   };
   const toggleModal = () => {
     gridModalOpen = !gridModalOpen;
-    console.log(w);
   };
   const toggle = () => {
     gridModalOpen = !gridModalOpen;
   };
 
-  export const toggle2 = () => (isOpen2 = !isOpen2);
   const clearResults = () => {
     console.log("Changing!");
     searchTerm.trim() === "" ? (items = $costumeList) : null;
@@ -155,311 +130,38 @@
   <link rel="stylesheet" href="landingStyles.css" />
 </svelte:head>
 
-<svelte:window bind:innerWidth={w} />
-
 <div class="landing">
-  <div class="filters">
-    {#if w > small}
-      <h5>Filters <Fa icon={faFilter} /></h5>
-    {/if}
-    <Nav vertical>
-      {#if w <= small}
-        <form>
-          <div class="collapseContainer">
-            <div class="collapsed">
-              <input
-                bind:value={searchTerm}
-                on:change={searchFilter}
-                class="searchBox"
-                type="text"
-                placeholder="Search..."
-              />
+  <!-- Filter area -->
+  <FilterArea {...params} {searchFilter} {handleFilter} {searchTerm} />
 
-              <div on:click={() => (isOpen = !isOpen)}>
-                <NavItem>Filters <Fa icon={faFilter} /></NavItem>
-              </div>
-
-              <Collapse {isOpen}>
-                <NavItem>Date Range</NavItem>
-                <NavItem>
-                  <label on:click={handleFilter}>
-                    <input bind:value={datePeriod1} type="checkbox" />
-                    1800-1819
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod2} type="checkbox" />
-                    1820-1829
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod3} type="checkbox" />
-                    1830-1839
-                  </label></NavItem
-                >
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod4} type="checkbox" />
-                    1840-1849
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod5} type="checkbox" />
-                    1850-1859
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod6} type="checkbox" />
-                    1860-1869
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod7} type="checkbox" />
-                    1870-1879
-                  </label>
-                </NavItem>
-              </Collapse>
-            </div>
-
-            <div class="collapsed">
-              <!-- <div on:click={() => (isOpen = !isOpen)}>
-              <NavItem>Group</NavItem>
-            </div> -->
-
-              <Collapse {isOpen}>
-                <NavItem>Group</NavItem>
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={women} />
-                    Women
-                  </label>
-                </NavItem>
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={men} />
-                    Men
-                  </label>
-                </NavItem>
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={children} />
-                    Children
-                  </label>
-                </NavItem>
-              </Collapse>
-            </div>
-
-            <div class="collapsed">
-              <!-- <div on:click={() => (isOpen = !isOpen)}>
-              <NavItem>Category</NavItem>
-            </div> -->
-
-              <Collapse {isOpen}>
-                <NavItem>Category</NavItem>
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={costume} />
-                    Costume
-                  </label></NavItem
-                >
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={garment} />
-                    Garment
-                  </label></NavItem
-                >
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={hairstyle} />
-                    Hairstyle
-                  </label></NavItem
-                >
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={accessory} />
-                    Accessory
-                  </label></NavItem
-                >
-              </Collapse>
-            </div>
-          </div>
-        </form>
-      {:else}
-        <form>
-          <div class="collapseContainer">
-            <div class="collapsed">
-              <div on:click={() => (isOpen = !isOpen)}>
-                <NavItem>Date Range</NavItem>
-              </div>
-
-              <Collapse {isOpen}>
-                <NavItem>
-                  <label on:click={handleFilter}>
-                    <input bind:value={datePeriod1} type="checkbox" />
-                    1800-1819
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod2} type="checkbox" />
-                    1820-1829
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod3} type="checkbox" />
-                    1830-1839
-                  </label></NavItem
-                >
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod4} type="checkbox" />
-                    1840-1849
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod5} type="checkbox" />
-                    1850-1859
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod6} type="checkbox" />
-                    1860-1869
-                  </label>
-                </NavItem>
-                <NavItem>
-                  <label>
-                    <input bind:value={datePeriod7} type="checkbox" />
-                    1870-1879
-                  </label>
-                </NavItem>
-              </Collapse>
-            </div>
-
-            <div class="collapsed">
-              <div id="toggler">
-                <NavItem>Group</NavItem>
-              </div>
-
-              <UncontrolledCollapse toggler="#toggler">
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={women} />
-                    Women
-                  </label>
-                </NavItem>
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={men} />
-                    Men
-                  </label>
-                </NavItem>
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={children} />
-                    Children
-                  </label>
-                </NavItem>
-              </UncontrolledCollapse>
-            </div>
-
-            <div class="collapsed">
-              <div id="toggler2">
-                <NavItem>Category</NavItem>
-              </div>
-              <UncontrolledCollapse toggler="#toggler2">
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={costume} />
-                    Costume
-                  </label></NavItem
-                >
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={garment} />
-                    Garment
-                  </label></NavItem
-                >
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={hairstyle} />
-                    Hairstyle
-                  </label></NavItem
-                >
-                <NavItem
-                  ><label>
-                    <input type="checkbox" bind:value={accessory} />
-                    Accessory
-                  </label></NavItem
-                >
-              </UncontrolledCollapse>
-            </div>
-          </div>
-        </form>
-      {/if}
-    </Nav>
-  </div>
+  <!-- Costume list area -->
   <div id="paginationDiv" class="overflow-auto">
-    <form on:submit|preventDefault={searchFilter}>
-      <input
-        bind:value={searchTerm}
-        on:change={clearResults}
-        class="searchBox"
-        type="text"
-        placeholder="Search..."
+    <div class="costumesWrapper">
+      <!-- Search Bar -->
+      <form on:submit|preventDefault={searchFilter}>
+        <input
+          bind:value={searchTerm}
+          on:change={clearResults}
+          class="searchBox"
+          type="text"
+          placeholder="Search..."
+        />
+      </form>
+      <ul class="items costumeGrid ">
+        {#each paginatedItems as item}
+          <CostumeItem {item} {handleModal} {imageSource} />
+        {/each}
+      </ul>
+      <LightPaginationNav
+        totalItems={items.length}
+        {pageSize}
+        {currentPage}
+        limit={2}
+        showStepOptions={true}
+        on:setPage={(e) => (currentPage = e.detail.page)}
       />
-    </form>
-    <ul class="items costumeGrid ">
-      {#each paginatedItems as item}
-        <li class="item">
-          <Card>
-            <div class="modalClick" on:click={() => handleModal(item.id)}>
-              <CardBody>
-                <div>
-                  <img
-                    src="{imageSource}{item.image}"
-                    alt={item.caption}
-                    loading="lazy"
-                  />
-                </div>
-                <div name="cardCaption" class="caption overflow-auto">
-                  {item.caption}
-                </div>
-              </CardBody>
-            </div>
-            <CardFooter>
-              <button>
-                {item.pdf}
-              </button>
-              <button>
-                {item.person}
-              </button>
-              <button>
-                {item.class}
-              </button>
-              <button>
-                {item.clothing}
-              </button>
-            </CardFooter>
-          </Card>
-        </li>
-      {/each}
-    </ul>
-    <LightPaginationNav
-      totalItems={items.length}
-      {pageSize}
-      {currentPage}
-      limit={2}
-      showStepOptions={true}
-      on:setPage={(e) => (currentPage = e.detail.page)}
-    />
+    </div>
+    
   </div>
   <!-- Dynamic grid tile modal -->
   <Modal isOpen={gridModalOpen} toggle={handleModal} size="lg">
@@ -498,55 +200,34 @@
 <style>
   .landing {
     padding: 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: 210px auto;
     height: 100%;
+    width: 100%;
   }
 
-  div.filters {
-    min-width: 12rem;
-    border-right: 1px solid rgba(128, 128, 128, 0.5);
-    background-color: #ddd;
+  .costumesWrapper {
+    max-width: 1265px;
+    margin: 0 auto;
   }
-  .filters h5 {
-    margin: 0;
-    padding: 0.25rem 0.75rem;
-    background-color: #888;
-  }
-  .collapsed {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
-  }
+
   .costumeGrid {
     display: grid;
     flex-wrap: wrap;
     padding: 1rem;
-    gap: 10px;
-    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
   }
   ul.costumeGrid {
     margin-bottom: 0;
   }
 
-  .item {
-    list-style: none;
-    height: 100%;
-  }
-  .item button {
-    border-radius: 20px;
-    background-color: #fff;
-    padding: 0.25rem 0.7rem;
-  }
-  .item img {
-    object-fit: contain;
-    max-height: 8rem;
-  }
-  .caption {
-    padding: 0 0 1rem 1rem;
-  }
   .cardModalBody {
     display: flex;
   }
   .cardModalImage {
     min-width: 15rem;
+    width: 100%;
   }
   .cardModalImage img {
     max-width: 100%;
@@ -564,11 +245,8 @@
     margin-top: 0.25rem;
   }
   #paginationDiv.overflow-auto {
-    max-height: 85vh;
+    max-height: calc(100vh - 60px);
     margin-top: 0;
-  }
-  div.caption.overflow-auto {
-    max-height: 20vh;
   }
   #paginationDiv input {
     border-radius: 6px;
@@ -578,83 +256,27 @@
     padding: 1rem 1rem 0 1rem;
   }
 
-  .float {
-    position: fixed;
-    bottom: 40px;
-    right: 20px;
-  }
-  .aboutDiv {
-    display: flex;
-  }
-  .aboutDiv div {
-    padding: 0.5rem;
-  }
-
-  @media screen and (min-width: 1400px) {
+  @media screen and (max-width: 1500px) {
+    .costumesWrapper {
+      max-width: 900px;
+    }
     .costumeGrid {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1065px) {
     .costumeGrid {
       grid-template-columns: 1fr;
     }
     .cardModalBody {
       flex-direction: column;
     }
-    .aboutDiv {
-      flex-direction: column;
-    }
-    .aboutDiv img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
   }
 
   @media screen and (max-width: 700px) {
-    .filters {
-      width: 100%;
-      border-right: 1px solid rgba(128, 128, 128, 0.5);
-      background-color: #ddd;
-      height: unset;
-      position: relative;
-    }
-    .items {
-      margin-left: 0;
-    }
     .landing {
-      flex-direction: column;
-    }
-    .searchBox {
-      width: 100%;
-    }
-    .item img {
-      width: 100%;
-    }
-    .overflow-auto {
-      max-height: 30vh;
-      margin-top: 0.25rem;
-    }
-    .cardModalImage img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
-    .cardModalImage {
-      min-width: unset !important;
-    }
-    .cardModalBody p {
-      font-size: 0.8rem;
-    }
-    .item button {
-      border-radius: 20px;
-      background-color: #fff;
-      padding: 0.2rem 0.4rem;
-      margin-bottom: 0.2rem;
+      grid-template-columns: 1fr;
     }
   }
 </style>
