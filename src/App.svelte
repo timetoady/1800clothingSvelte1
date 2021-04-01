@@ -23,7 +23,7 @@
   <Nav/>
 
   <main>
-    <Router>
+    <Router >
       <div class="mainContent">
         <!--for now the router just support case sensitive,
 				  one workaround colud be add two time the route

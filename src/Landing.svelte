@@ -17,11 +17,10 @@
     InputGroup,
   } from "sveltestrap";
   import { paginate, LightPaginationNav } from "svelte-paginate";
-  import { costumeList, currentCostume } from "./stores";
-
-  import FilterArea from './FilterArea.svelte'
-  import CostumeItem from './CostumeItem.svelte'
-
+  import { costumeList, currentCostume, theFilters } from "./stores";
+  import FilterArea from "./FilterArea.svelte";
+  import FilterArea2 from "./FilterArea2.svelte";
+  import CostumeItem from "./CostumeItem.svelte";
 
   //Modal openers
   let items = $costumeList;
@@ -31,31 +30,32 @@
   let pageSize = 18;
   $: paginatedItems = paginate({ items, pageSize, currentPage });
   const imageSource = "assets/images/";
-
+  $: console.log($theFilters);
+  $: handleFilter($theFilters);
   //modal items
   let gridModalOpen = false;
-  
+
   //Search and filters
   let searchTerm = "";
   //let searchResult = [];
 
-  $: params = {
-    datePeriod1: false,
-    datePeriod2: false,
-    datePeriod3: false,
-    datePeriod4: false,
-    datePeriod5: false,
-    datePeriod6: false,
-    datePeriod7: false,
-    datePeriod8: false,
-    women: false,
-    men: false,
-    children: false,
-    costume: false,
-    garment: false,
-    hairstyle: false,
-    accessory: false,
-  };
+  // $: params = {
+  //   datePeriod1: false,
+  //   datePeriod2: false,
+  //   datePeriod3: false,
+  //   datePeriod4: false,
+  //   datePeriod5: false,
+  //   datePeriod6: false,
+  //   datePeriod7: false,
+  //   datePeriod8: false,
+  //   women: false,
+  //   men: false,
+  //   children: false,
+  //   costume: false,
+  //   garment: false,
+  //   hairstyle: false,
+  //   accessory: false,
+  // };
 
   const searchFilter = () => {
     console.log("Search term is:", searchTerm);
@@ -68,7 +68,12 @@
     //   };
     // });
     for (const entry of $costumeList) {
-      items = $costumeList;
+      if($theFilters.length === 0){
+        items = $costumeList;
+      } else{
+        items = handleFilter($theFilters)
+      }
+      
       if (
         entry.caption
           .toLowerCase()
@@ -95,9 +100,78 @@
     // checkStuff()
   };
 
-  const handleFilter = () => {
-    console.log("Filter clicked!");
+  const handleFilter = (filters) => {
+    if (filters.length > 0) {
+      console.log("Filters on")
+      let filterResult = [];
+      for (const entry of items) {
+        for (const filter of $theFilters) {
+          if (Object.values(entry).includes(filter)) {
+            filterResult.push(entry);
+          }
+        }
+      }
+      console.log("Filter result: ", filterResult)
+      items = filterResult;
+      return filterResult;
+    } else{
+      console.log("Filters off")
+      if (searchTerm) {
+        searchFilter()
+      } else{
+        items = $costumeList
+      }
+    }
+
+    // switch (filter) {
+    //   case "date1":
+    //     params.datePeriod1 = !params.datePeriod1;
+    //     break;
+    //   case "date2":
+    //     params.datePeriod2 = !params.datePeriod2;
+    //     break;
+    //   case "date3":
+    //     params.datePeriod3 = !params.datePeriod3;
+    //     break;
+    //   case "date4":
+    //     params.datePeriod4 = !params.datePeriod4;
+    //     break;
+    //   case "date5":
+    //     params.datePeriod5 = !params.datePeriod5;
+    //     break;
+    //   case "date6":
+    //     params.datePeriod6 = !params.datePeriod6;
+    //     break;
+    //   case "date7":
+    //     params.datePeriod7 = !params.datePeriod7;
+    //     break;
+    //   case "date8":
+    //     params.datePeriod7 = !params.datePeriod8;
+    //     break;
+    //   case "women":
+    //     params.women = !params.women;
+    //     break;
+    //   case "men":
+    //     params.men = !params.men;
+    //     break;
+    //   case "children":
+    //     params.children = !params.children;
+    //     break;
+    //   case "costume":
+    //     params.costume = !params.costume;
+    //     break;
+    //   case "garment":
+    //     params.garment = !params.garment;
+    //     break;
+    //   case "hairstyle":
+    //     params.hairstyle = !params.hairstyle;
+    //     break;
+    //   case "accessory":
+    //     params.accessory = !params.accessory;
+    //     break;
+    // }
   };
+
   const handleModal = (id) => {
     //replace this with an async await when on a db
     let current = $costumeList.filter((costume) => {
@@ -133,8 +207,9 @@
 
 <div class="landing">
   <!-- Filter area -->
-  <FilterArea {...params} {searchFilter} {handleFilter} {searchTerm} />
+  <!-- <FilterArea {...params} {searchFilter} {handleFilter} {searchTerm} /> -->
 
+  <FilterArea2 />
   <!-- Costume list area -->
   <div id="paginationDiv" class="overflow-auto">
     <div class="costumesWrapper">
@@ -162,7 +237,6 @@
         on:setPage={(e) => (currentPage = e.detail.page)}
       />
     </div>
-    
   </div>
   <!-- Dynamic grid tile modal -->
   <Modal isOpen={gridModalOpen} toggle={handleModal} size="lg">
@@ -195,7 +269,6 @@
       <Button color="secondary" on:click={toggleModal}>CLOSE</Button>
     </ModalFooter>
   </Modal>
- 
 </div>
 
 <style>

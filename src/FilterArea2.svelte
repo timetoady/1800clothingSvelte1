@@ -4,39 +4,18 @@
     NavItem,
     Collapse,
     UncontrolledCollapse,
-    Card,
-    CardBody,
-    CardFooter,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Button,
-    InputGroup,
+
   } from "sveltestrap";
 
   import Fa from "svelte-fa";
   import { faFilter } from "@fortawesome/free-solid-svg-icons";
+  import { theFilters } from "./stores"
+  let filters = []
+  $: updateFilters(filters)
 
-  export let datePeriod1,
-    datePeriod2,
-    datePeriod3,
-    datePeriod4,
-    datePeriod5,
-    datePeriod6,
-    datePeriod7,
-    datePeriod8,
-    women,
-    men,
-    children,
-    costume,
-    garment,
-    hairstyle,
-    accessory,
-    searchTerm,
-    searchFilter,
-    handleFilter;
-
+  const updateFilters = () => {
+    theFilters.set(filters)
+  }
   let w;
   //Screen sizes
   const small = 700;
@@ -74,46 +53,53 @@
 
             <Collapse {isOpen}>
               <NavItem>Date Range</NavItem>
+              <aFilter></aFilter>
               <NavItem>
-                <label on:click={handleFilter}>
-                  <input bind:value={datePeriod1} type="checkbox" />
+                <label >
+                  <input bind:group={filters} value="1800" type="checkbox" />
                   1800-1819
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input bind:value={datePeriod2} type="checkbox" />
+                  <input bind:group={filters} value="1820" type="checkbox" />
                   1820-1829
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input bind:value={datePeriod3} type="checkbox" />
+                  <input bind:group={filters} value="1830" type="checkbox" />
                   1830-1839
                 </label></NavItem
               >
               <NavItem>
                 <label>
-                  <input bind:value={datePeriod4} type="checkbox" />
+                  <input bind:group={filters} value="1840" type="checkbox" />
                   1840-1849
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input bind:value={datePeriod5} type="checkbox" />
+                  <input bind:group={filters} value="1850" type="checkbox" />
                   1850-1859
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input bind:value={datePeriod6} type="checkbox" />
+                  <input bind:group={filters} value="1860" type="checkbox" />
                   1860-1869
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input bind:value={datePeriod7} type="checkbox" />
+                  <input bind:group={filters} value="1870" type="checkbox" />
                   1870-1879
+                </label>
+              </NavItem>
+              <NavItem>
+                <label>
+                  <input bind:group={filters} value="1880" type="checkbox" />
+                  1880-1889
                 </label>
               </NavItem>
             </Collapse>
@@ -128,19 +114,19 @@
               <NavItem>Group</NavItem>
               <NavItem
                 ><label>
-                  <input type="checkbox" bind:value={women} />
+                  <input type="checkbox" bind:group={filters} value="women" />
                   Women
                 </label>
               </NavItem>
               <NavItem
                 ><label>
-                  <input type="checkbox" bind:value={men} />
+                  <input type="checkbox" bind:group={filters} value="men" />
                   Men
                 </label>
               </NavItem>
               <NavItem
                 ><label>
-                  <input type="checkbox" bind:value={children} />
+                  <input type="checkbox" bind:group={filters} value="children" />
                   Children
                 </label>
               </NavItem>
@@ -156,25 +142,25 @@
               <NavItem>Category</NavItem>
               <NavItem
                 ><label>
-                  <input type="checkbox" bind:value={costume} />
+                  <input type="checkbox" bind:group={filters} value="costume" />
                   Costume
                 </label></NavItem
               >
               <NavItem
                 ><label>
-                  <input type="checkbox" bind:value={garment} />
+                  <input type="checkbox" bind:group={filters} value="garment" />
                   Garment
                 </label></NavItem
               >
               <NavItem
                 ><label>
-                  <input type="checkbox" bind:value={hairstyle} />
+                  <input type="checkbox" bind:group={filters} value="hairstyle" />
                   Hairstyle
                 </label></NavItem
               >
               <NavItem
                 ><label>
-                  <input type="checkbox" bind:value={accessory} />
+                  <input type="checkbox" bind:group={filters} value="accessory" />
                   Accessory
                 </label></NavItem
               >
@@ -193,49 +179,55 @@
             <Collapse {isOpen}>
               <NavItem >
                 <label >
-                  <input on:click={() => handleFilter("date1")} bind:checked={datePeriod1} type="checkbox" />
+                  <input bind:group={filters} value="1800" type="checkbox" />
                   1800-1819
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input on:click={() => handleFilter("date2")} bind:checked={datePeriod2} type="checkbox" />
+                  <input bind:group={filters} value="1810" type="checkbox" />
                   1820-1829
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input on:click={() => handleFilter("date3")} bind:checked={datePeriod3} type="checkbox" />
+                  <input bind:group={filters} value="1820" type="checkbox" />
                   1830-1839
                 </label></NavItem
               >
               <NavItem>
                 <label>
-                  <input on:click={() => handleFilter("date4")} bind:checked={datePeriod4} type="checkbox" />
+                  <input bind:group={filters} value="1830" type="checkbox" />
                   1840-1849
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input on:click={() => handleFilter("date5")} bind:checked={datePeriod5} type="checkbox" />
+                  <input bind:group={filters} value="1840" type="checkbox" />
                   1850-1859
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input on:click={() => handleFilter("date6")} bind:checked={datePeriod6} type="checkbox" />
+                  <input bind:group={filters} value="1850" type="checkbox" />
                   1860-1869
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input on:click={() => handleFilter("date7")} bind:checked={datePeriod7} type="checkbox" />
+                  <input bind:group={filters} value="1860" type="checkbox" />
                   1870-1879
                 </label>
               </NavItem>
               <NavItem>
                 <label>
-                  <input on:click={() => handleFilter("date8")} bind:checked={datePeriod8} type="checkbox" />
+                  <input bind:group={filters} value="1870" type="checkbox" />
+                  1880-1889
+                </label>
+              </NavItem>
+              <NavItem>
+                <label>
+                  <input bind:group={filters} value="1880" type="checkbox" />
                   1880-1889
                 </label>
               </NavItem>
@@ -250,19 +242,19 @@
             <UncontrolledCollapse toggler="#toggler">
               <NavItem
                 ><label>
-                  <input on:click={() => handleFilter("women")} type="checkbox" bind:value={women} />
+                  <input bind:group={filters} value="women"  type="checkbox" />
                   Women
                 </label>
               </NavItem>
               <NavItem
                 ><label>
-                  <input on:click={() => handleFilter("men")} type="checkbox" bind:value={men} />
+                  <input bind:group={filters} value="men"  type="checkbox"/>
                   Men
                 </label>
               </NavItem>
               <NavItem
                 ><label>
-                  <input on:click={() => handleFilter("children")} type="checkbox" bind:value={children} />
+                  <input bind:group={filters} value="children" type="checkbox"/>
                   Children
                 </label>
               </NavItem>
@@ -276,25 +268,25 @@
             <UncontrolledCollapse toggler="#toggler2">
               <NavItem
                 ><label>
-                  <input on:click={() => handleFilter("costume")} type="checkbox" bind:value={costume} />
+                  <input bind:group={filters} value="costume"  type="checkbox" />
                   Costume
                 </label></NavItem
               >
               <NavItem
                 ><label>
-                  <input on:click={() => handleFilter("garment")} type="checkbox" bind:value={garment} />
+                  <input bind:group={filters} value="garment" type="checkbox"  />
                   Garment
                 </label></NavItem
               >
               <NavItem
                 ><label>
-                  <input on:click={() => handleFilter("hairstyle")} type="checkbox" bind:value={hairstyle} />
+                  <input bind:group={filters} value="hairstyle" type="checkbox"  />
                   Hairstyle
                 </label></NavItem
               >
               <NavItem
                 ><label>
-                  <input on:click={() => handleFilter("accessory")} type="checkbox" bind:value={accessory} />
+                  <input bind:group={filters} value="accessory" type="checkbox"  />
                   Accessory
                 </label></NavItem
               >
