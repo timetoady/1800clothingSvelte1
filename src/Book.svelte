@@ -1,16 +1,29 @@
 <script>
+  import { onMount } from 'svelte';
   import { Nav, NavItem } from "sveltestrap";
   import Fa from "svelte-fa";
   import { faDownload } from "@fortawesome/free-solid-svg-icons";
+  import PDFObject from './pdfobject.js'
   let pdfPreview = "defaultView.pdf";
   let pdfBase;
   $: pdfURL = `./assets/pdfs/${pdfPreview}`;
+
+  // click handler for old iframe
   const handleViewerUpdate = (url) => {
     console.log(url);
     pdfBase = url;
     pdfPreview = `${url}preview.pdf`;
     console.log(pdfURL);
-  };
+  }
+
+  // click handler for PDFObject 
+  const embedPDF = (url) => {
+    let file = url === undefined ? 'defaultView' : url
+    console.log(`assets/pdfs/${file}.pdf`)
+    PDFObject.embed(`assets/pdfs/${file}.pdf`, "#pdfBox");
+  }
+
+  onMount(async () => embedPDF())
 </script>
 
 <svelte:head>
@@ -26,49 +39,49 @@
     <h5>The Book</h5>
     <Nav vertical>
       <NavItem>
-        <label on:click={() => handleViewerUpdate("1800-1819")}>
+        <label on:click={() => embedPDF("1800-1819")}>
           1800-1819
           <input type="radio" name="chapter" />
         </label>
       </NavItem>
       <NavItem>
-        <label on:click={() => handleViewerUpdate("1820-1829")}>
+        <label on:click={() => embedPDF("1820-1829")}>
           1820-1829
           <input type="radio" name="chapter" />
         </label>
       </NavItem>
       <NavItem>
-        <label on:click={() => handleViewerUpdate("1830s")}>
+        <label on:click={() => embedPDF("1830s")}>
           1830-1839
           <input type="radio" name="chapter" />
         </label>
       </NavItem>
       <NavItem>
-        <label on:click={() => handleViewerUpdate("1840s")}>
+        <label on:click={() => embedPDF("1840s")}>
           1840-1849
           <input type="radio" name="chapter" />
         </label>
       </NavItem>
       <NavItem>
-        <label on:click={() => handleViewerUpdate("1850s")}>
+        <label on:click={() => embedPDF("1850s")}>
           1850-1859
           <input type="radio" name="chapter" />
         </label>
       </NavItem>
       <NavItem>
-        <label on:click={() => handleViewerUpdate("1860s")}>
+        <label on:click={() => embedPDF("1860s")}>
           1860-1869
           <input type="radio" name="chapter" />
         </label>
       </NavItem>
       <NavItem>
-        <label on:click={() => handleViewerUpdate("1870s")}>
+        <label on:click={() => embedPDF("1870s")}>
           1870-1879
           <input type="radio" name="chapter" />
         </label>
       </NavItem>
       <NavItem>
-        <label on:click={() => handleViewerUpdate("1880s")}>
+        <label on:click={() => embedPDF("1880s")}>
           1880-1889
           <input type="radio" name="chapter" />
         </label>
@@ -76,13 +89,16 @@
     </Nav>
   </div>
   <div class="viewer">
-    <div class="bookBox">
+    <!-- <div class="bookBox">
       <a class="download" href={pdfBase + ".pdf"} download
         >Download Decade <Fa icon={faDownload} /></a
       >
-    </div>
+    </div> -->
     <div class="viewerBox">
-      <iframe title="PDFviewer" src={pdfURL} />
+      <!-- <iframe title="PDFviewer" src={pdfURL} /> -->
+    </div>
+    <div id="pdfBox">
+      <!-- PDFObject inserts PDF reader here -->
     </div>
   </div>
 </div>
@@ -111,15 +127,22 @@
   }
   .viewer {
     margin: 0 auto;
+    max-height: calc(100vh - 60px);
   }
   .viewerBox {
     width: 70vw;
-    padding: 0.2rem 2rem;
+    /* padding: 0.2rem 2rem; */
   }
 
   .viewerBox iframe {
     width: 100%;
     height: 80vh;
+  }
+
+  #pdfBox {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
   }
 
   a.download {
