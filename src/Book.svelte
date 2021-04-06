@@ -16,11 +16,17 @@
     console.log(pdfURL);
   }
 
+  // PDF object options
+  const pdfOptions = {
+    fallbackLink: false,
+    forceIframe: true
+  }
+
   // click handler for PDFObject 
   const embedPDF = (url) => {
     let file = url === undefined ? 'defaultView' : url
     console.log(`assets/pdfs/${file}.pdf`)
-    PDFObject.embed(`assets/pdfs/${file}.pdf`, "#pdfBox");
+    PDFObject.embed(`assets/pdfs/${file}.pdf`, "#pdfBox", pdfOptions);
   }
 
   onMount(async () => embedPDF())
@@ -165,9 +171,10 @@
       text-align: center;
     }
     .viewer {
-    margin: 0;
-    padding: .2rem;
-  }
+      margin: 0;
+      padding: .2rem;
+      height: 100%;
+    }
     .viewerBox {
       width: 100%;
       padding: 0.2rem;
@@ -177,12 +184,12 @@
       height: 80vh;
     }
     a.download {
-    text-align: center;
-    padding-right: 0;
+      text-align: center;
+      padding-right: 0;
     
-  }
-  div.bookBox {
-    text-align: center;
-  }
+    }
+    div.bookBox {
+      text-align: center;
+    }
   }
 </style>
