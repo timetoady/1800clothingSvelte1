@@ -1,4 +1,6 @@
 <script>
+
+
   //next, add form binding to variables, then a $ object that updates with those, to use in filter to render objects.
   import { onMount } from "svelte";
   import {
@@ -110,7 +112,12 @@
       handleFilter(filters);
       searchResults = [];
     }
-
+    if(filterState){
+      handleFilter(filters);
+      searchResults = [];
+      items = paginatedItems
+    }
+    console.log("Paginated items", paginatedItems)
     for (const entry of items) {
       if (
         entry.caption
