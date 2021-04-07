@@ -6,7 +6,7 @@
   import Nav from "./Nav.svelte";
 
   export let url = "";
-  $: console.log(url)
+  //$: console.log(url)
 </script>
 
 <svelte:head>

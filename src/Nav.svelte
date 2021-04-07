@@ -10,7 +10,9 @@
       <Link to="/"
         ><img
           class="title"
+
           src="./assets/logo.png"
+
           alt="1800clothing.org"
         /></Link
       >
