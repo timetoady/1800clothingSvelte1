@@ -106,6 +106,10 @@
       resetItems();
       return;
     }
+    if (searchTerm && filterState){
+      handleFilter(filters);
+      searchResults = [];
+    }
 
     for (const entry of items) {
       if (
