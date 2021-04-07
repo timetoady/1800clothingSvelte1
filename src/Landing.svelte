@@ -2,19 +2,11 @@
   //next, add form binding to variables, then a $ object that updates with those, to use in filter to render objects.
   import { onMount } from "svelte";
   import {
-    Nav,
-    NavItem,
-    Collapse,
-    UncontrolledCollapse,
-    Card,
-    CardBody,
-    CardFooter,
     Modal,
     ModalHeader,
     ModalBody,
     ModalFooter,
     Button,
-    InputGroup,
   } from "sveltestrap";
   import { paginate, LightPaginationNav } from "svelte-paginate";
   import {
@@ -25,16 +17,20 @@
     dateFilters,
     categoryFilters,
   } from "./stores";
-  //import FilterArea from "./FilterArea.svelte";
+  //New filter area with updated filtering applied
   import FilterArea2 from "./FilterArea2.svelte";
   import CostumeItem from "./CostumeItem.svelte";
+  //Default items setup
   $: items = $costumeList;
+
+  //Sets the filters by the filter stores.
   $: filters = {
     dates: $dateFilters,
     groups: $groupFilters,
     categories: $categoryFilters,
     classes: $classFilters,
   };
+  //Checks on the state of the filters both as a group and individually.
   $: filterState =
     filters.dates.length === 0 &&
     filters.groups.length === 0 &&
@@ -47,9 +43,13 @@
   $: categoriesFiltered = filters.categories.length > 0 ? true : false;
   $: classesFiltered = filters.classes.length > 0 ? true : false;
 
+  //Search items
+  let searchTerm = "";
+  let searchResults = [];
+
   //Paging parts
   let currentPage = 1;
-  let pageSize = 6;
+  let pageSize = 12;
   const imageSource = "assets/images/";
   $: console.log(filters);
   $: handleFilter(filters);
@@ -58,11 +58,7 @@
   //modal items
   let gridModalOpen = false;
 
-  //Search and filters
-  let searchTerm = "";
-  let searchResults = [];
-  
-
+  //Utility function to apply filter. Can be exported.
   const applyFilter = (thingToFilter, thingToFilterBy, thingInJSON) => {
     let newItems = thingToFilter.filter((item) => {
       if (
@@ -76,6 +72,7 @@
     return newItems;
   };
 
+//Set search items
   function setSearch() {
     if (searchTerm.trim() !== "" && searchResults !== []) {
       console.log("Search Result is: ", searchResults);
@@ -92,27 +89,24 @@
     searchResults = [];
   }
 
-  function logFilteredItems() {
-    console.log("Items now show as", items);
-  }
+//Primary function responsible for filtering items by the searchTerm.
   const searchFilter = () => {
     console.log("Search term is:", searchTerm);
 
     if (!filterState) {
-      console.log("Search detects filters")
-      items = $costumeList
-      searchResults = []
+      console.log("Search detects no filters");
+      resetItems();
     }
-    if(searchTerm.trim() === "" && filterState){
-      handleFilter(filters)
-      searchResults = []
-    }
-    if(!filterState && searchTerm.trim() === ""){
-      items = $costumeList;
-      searchResults = []
+    if (searchTerm.trim() === "" && filterState) {
+      searchResults = [];
+      handleFilter(filters);
       return;
     }
-  
+    if (!filterState && searchTerm.trim() === "") {
+      resetItems();
+      return;
+    }
+
     for (const entry of items) {
       if (
         entry.caption
@@ -136,11 +130,18 @@
         searchResults.push(entry);
       }
     }
-    setSearch()
+    setSearch();
   };
+
+  //Filter handler that checks all filter scenarios, including if search term is present.Landing
+  //This is big and ugly, and could be optimized.
   const handleFilter = (filters) => {
     console.log("Handle filter called");
-    if(searchTerm.trim() !== "") {items = searchResults} else {items = $costumeList;}
+    if (searchTerm.trim() !== "") {
+      items = searchResults;
+    } else {
+      items = $costumeList;
+    }
     let newItems;
     if (
       datesFiltered &&
@@ -248,7 +249,6 @@
       let newItems = applyFilter(items, "classes", "class");
       items = newItems;
     }
-
     if (
       !datesFiltered &&
       !groupsFiltered &&
@@ -256,52 +256,11 @@
       !classesFiltered
     ) {
       items = $costumeList;
+      if (searchTerm) {
+        searchFilter();
+      }
     }
   };
-  // const handleFilter = (filters) => {
-  //   items = $costumeList
-  //   if (filters.length > 0) {
-  //     console.log("Filters on");
-  //     let filterResult = [];
-  //     if (searchTerm.trim() !== "") {
-  //       console.log("Search term detected", searchTerm)
-  //       console.log("Items currently set to: ", items)
-
-  //       for (const entry of items) {
-  //         for (const filter of $theFilters) {
-  //           if (Object.values(entry).includes(filter)) {
-  //             filterResult.push(entry);
-  //           }
-  //         }
-  //       }
-  //     } else {
-  //       console.log("No current search")
-  //       for (const entry of items) {
-  //         for (const filter of $theFilters) {
-  //           if (Object.values(entry).includes(filter)) {
-  //             filterResult.push(entry);
-  //           }
-  //         }
-  //       }
-  //     }
-
-  //     console.log("Filter result: ", filterResult);
-  //     items = filterResult;
-  //     console.log("Items is now: ", items);
-  //     return filterResult;
-  //   } else {
-  //     console.log("Filters off");
-  //     if (searchTerm) {
-  //       console.log("Filter detects search term")
-  //       items = $costumeList
-  //       searchFilter(searchTerm);
-  //     } else {
-  //       console.log("Filter sees no search term, resetting items to full list.")
-  //       items = $costumeList;
-  //       console.log(items)
-  //     }
-  //   }
-  // };
 
   const handleModal = (id) => {
     //replace this with an async await when on a db
@@ -335,9 +294,7 @@
 
 <div class="landing">
   <!-- Filter area -->
-  <!-- <FilterArea {...params} {searchFilter} {handleFilter} {searchTerm} /> -->
-
-  <FilterArea2 />
+   <FilterArea2 />
   <!-- Costume list area -->
   <div id="paginationDiv" class="overflow-auto">
     <div class="costumesWrapper">
