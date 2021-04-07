@@ -10,7 +10,7 @@
       <Link to="/"
         ><img
           class="title"
-          src="./assets/tempLogo.png"
+          src="./assets/1800sClothingLogo.png"
           alt="1800clothing.org"
         /></Link
       >

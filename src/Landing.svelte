@@ -2,76 +2,116 @@
   //next, add form binding to variables, then a $ object that updates with those, to use in filter to render objects.
   import { onMount } from "svelte";
   import {
-    Nav,
-    NavItem,
-    Collapse,
-    UncontrolledCollapse,
-    Card,
-    CardBody,
-    CardFooter,
     Modal,
     ModalHeader,
     ModalBody,
     ModalFooter,
     Button,
-    InputGroup,
   } from "sveltestrap";
   import { paginate, LightPaginationNav } from "svelte-paginate";
-  import { costumeList, currentCostume, theFilters } from "./stores";
-  import FilterArea from "./FilterArea.svelte";
+  import {
+    classFilters,
+    costumeList,
+    currentCostume,
+    groupFilters,
+    dateFilters,
+    categoryFilters,
+  } from "./stores";
+  //New filter area with updated filtering applied
   import FilterArea2 from "./FilterArea2.svelte";
   import CostumeItem from "./CostumeItem.svelte";
-  let items = $costumeList;
+  //Default items setup
+  $: items = $costumeList;
+
+  //Sets the filters by the filter stores.
+  $: filters = {
+    dates: $dateFilters,
+    groups: $groupFilters,
+    categories: $categoryFilters,
+    classes: $classFilters,
+  };
+  //Checks on the state of the filters both as a group and individually.
+  $: filterState =
+    filters.dates.length === 0 &&
+    filters.groups.length === 0 &&
+    filters.categories.length === 0 &&
+    filters.classes.length === 0
+      ? false
+      : true;
+  $: datesFiltered = filters.dates.length > 0 ? true : false;
+  $: groupsFiltered = filters.groups.length > 0 ? true : false;
+  $: categoriesFiltered = filters.categories.length > 0 ? true : false;
+  $: classesFiltered = filters.classes.length > 0 ? true : false;
+
+  //Search items
+  let searchTerm = "";
+  let searchResults = [];
 
   //Paging parts
   let currentPage = 1;
-  let pageSize = 18;
-  $: paginatedItems = paginate({ items, pageSize, currentPage });
+  let pageSize = 12;
   const imageSource = "assets/images/";
-  $: console.log($theFilters);
-  $: handleFilter($theFilters);
+  $: console.log(filters);
+  $: handleFilter(filters);
+  $: paginatedItems = paginate({ items, pageSize, currentPage });
+
   //modal items
   let gridModalOpen = false;
 
-  //Search and filters
-  let searchTerm = "";
-  //let searchResult = [];
+  //Utility function to apply filter. Can be exported.
+  const applyFilter = (thingToFilter, thingToFilterBy, thingInJSON) => {
+    let newItems = thingToFilter.filter((item) => {
+      if (
+        filters[`${thingToFilterBy}`].some(
+          (element) => element == item[`${thingInJSON}`]
+        )
+      ) {
+        return item;
+      }
+    });
+    return newItems;
+  };
 
-  // $: params = {
-  //   datePeriod1: false,
-  //   datePeriod2: false,
-  //   datePeriod3: false,
-  //   datePeriod4: false,
-  //   datePeriod5: false,
-  //   datePeriod6: false,
-  //   datePeriod7: false,
-  //   datePeriod8: false,
-  //   women: false,
-  //   men: false,
-  //   children: false,
-  //   costume: false,
-  //   garment: false,
-  //   hairstyle: false,
-  //   accessory: false,
-  // };
+//Set search items
+  function setSearch() {
+    if (searchTerm.trim() !== "" && searchResults !== []) {
+      console.log("Search Result is: ", searchResults);
+      items = searchResults;
+      console.log("After search, items are now:", items);
+    } else {
+      items = $costumeList;
+      searchResults = [];
+    }
+  }
 
+  function resetItems() {
+    items = $costumeList;
+    searchResults = [];
+  }
+
+//Primary function responsible for filtering items by the searchTerm.
   const searchFilter = () => {
     console.log("Search term is:", searchTerm);
-    console.log($costumeList);
-    let searchResult = [];
-    //filter by check boxes first.
-    // let searchResult = $costumeList.filter((entry) => {
-    //   if (Object.values(entry).includes(searchTerm)) {
-    //     return entry
-    //   };
-    // });
-    for (const entry of $costumeList) {
-      if($theFilters.length === 0){
-        items = $costumeList;
-      } else{
-        items = handleFilter($theFilters)
-      }
-      
+
+    if (!filterState) {
+      console.log("Search detects no filters");
+      resetItems();
+    }
+    if (searchTerm.trim() === "" && filterState) {
+      searchResults = [];
+      handleFilter(filters);
+      return;
+    }
+    if (!filterState && searchTerm.trim() === "") {
+      resetItems();
+      return;
+    }
+    if (searchTerm && filterState){
+      handleFilter(filters);
+      searchResults = [];
+    }
+
+    for (const entry of items) {
       if (
         entry.caption
           .toLowerCase()
@@ -91,83 +131,139 @@
           .includes(searchTerm.toLowerCase().trim()) ||
         entry.pdf == searchTerm
       ) {
-        searchResult.push(entry);
+        searchResults.push(entry);
       }
     }
-    items = searchResult;
-    // checkStuff()
+    setSearch();
   };
 
+  //Filter handler that checks all filter scenarios, including if search term is present.Landing
+  //This is big and ugly, and could be optimized.
   const handleFilter = (filters) => {
-    if (filters.length > 0) {
-      console.log("Filters on")
-      let filterResult = [];
-      for (const entry of items) {
-        for (const filter of $theFilters) {
-          if (Object.values(entry).includes(filter)) {
-            filterResult.push(entry);
-          }
-        }
-      }
-      console.log("Filter result: ", filterResult)
-      items = filterResult;
-      return filterResult;
-    } else{
-      console.log("Filters off")
-      if (searchTerm) {
-        searchFilter()
-      } else{
-        items = $costumeList
-      }
+    console.log("Handle filter called");
+    if (searchTerm.trim() !== "") {
+      items = searchResults;
+    } else {
+      items = $costumeList;
+    }
+    let newItems;
+    if (
+      datesFiltered &&
+      groupsFiltered &&
+      categoriesFiltered &&
+      classesFiltered
+    ) {
+      let filter1 = applyFilter(items, "dates", "pdf");
+      let filter2 = applyFilter(filter1, "groups", "person");
+      let filter3 = applyFilter(filter2, "categories", "clothing");
+      let filter4 = applyFilter(filter3, "classes", "class");
+      items = filter4;
+      return;
+    }
+    if (datesFiltered && groupsFiltered && categoriesFiltered) {
+      let filter1 = applyFilter(items, "dates", "pdf");
+      let filter2 = applyFilter(filter1, "groups", "person");
+      let filter3 = applyFilter(filter2, "categories", "clothing");
+      items = filter3;
+      return;
+    }
+    if (classesFiltered && groupsFiltered && categoriesFiltered) {
+      let filter1 = applyFilter(items, "classes", "class");
+      let filter2 = applyFilter(filter1, "groups", "person");
+      let filter3 = applyFilter(filter2, "categories", "clothing");
+      items = filter3;
+      return;
+    }
+    if (datesFiltered && classesFiltered && categoriesFiltered) {
+      let filter1 = applyFilter(items, "dates", "pdf");
+      let filter2 = applyFilter(items, "classes", "class");
+      let filter3 = applyFilter(filter2, "categories", "clothing");
+      items = filter3;
+      return;
+    }
+    if (datesFiltered && groupsFiltered && classesFiltered) {
+      let filter1 = applyFilter(items, "dates", "pdf");
+      let filter2 = applyFilter(filter1, "groups", "person");
+      let filter3 = applyFilter(items, "classes", "class");
+      items = filter3;
+      return;
+    }
+    if (datesFiltered && groupsFiltered) {
+      console.log("Dates and Groups!");
+      let filter1 = applyFilter(items, "dates", "pdf");
+      let filter2 = applyFilter(filter1, "groups", "person");
+      items = filter2;
+      return;
+    }
+    if (datesFiltered && categoriesFiltered) {
+      console.log("Dates and Categories!");
+      let filter1 = applyFilter(items, "dates", "pdf");
+      let filter2 = applyFilter(filter1, "categories", "clothing");
+      items = filter2;
+      return;
+    }
+    if (datesFiltered && classesFiltered) {
+      console.log("Dates and Classes!");
+      let filter1 = applyFilter(items, "dates", "pdf");
+      let filter2 = applyFilter(filter1, "classes", "class");
+      items = filter2;
+      return;
+    }
+    if (groupsFiltered && categoriesFiltered) {
+      console.log("Groups and Categories!");
+      let filter1 = applyFilter(items, "groups", "person");
+      let filter2 = applyFilter(filter1, "categories", "clothing");
+      items = filter2;
+      return;
+    }
+    if (groupsFiltered && classesFiltered) {
+      console.log("Groups and Classes!");
+      let filter1 = applyFilter(items, "groups", "person");
+      let filter2 = applyFilter(filter1, "classes", "class");
+      items = filter2;
+      return;
+    }
+    if (classesFiltered && categoriesFiltered) {
+      console.log("Classes and Categories!");
+      let filter1 = applyFilter(items, "classes", "class");
+      let filter2 = applyFilter(filter1, "categories", "clothing");
+      items = filter2;
+      return;
     }
 
-    // switch (filter) {
-    //   case "date1":
-    //     params.datePeriod1 = !params.datePeriod1;
-    //     break;
-    //   case "date2":
-    //     params.datePeriod2 = !params.datePeriod2;
-    //     break;
-    //   case "date3":
-    //     params.datePeriod3 = !params.datePeriod3;
-    //     break;
-    //   case "date4":
-    //     params.datePeriod4 = !params.datePeriod4;
-    //     break;
-    //   case "date5":
-    //     params.datePeriod5 = !params.datePeriod5;
-    //     break;
-    //   case "date6":
-    //     params.datePeriod6 = !params.datePeriod6;
-    //     break;
-    //   case "date7":
-    //     params.datePeriod7 = !params.datePeriod7;
-    //     break;
-    //   case "date8":
-    //     params.datePeriod7 = !params.datePeriod8;
-    //     break;
-    //   case "women":
-    //     params.women = !params.women;
-    //     break;
-    //   case "men":
-    //     params.men = !params.men;
-    //     break;
-    //   case "children":
-    //     params.children = !params.children;
-    //     break;
-    //   case "costume":
-    //     params.costume = !params.costume;
-    //     break;
-    //   case "garment":
-    //     params.garment = !params.garment;
-    //     break;
-    //   case "hairstyle":
-    //     params.hairstyle = !params.hairstyle;
-    //     break;
-    //   case "accessory":
-    //     params.accessory = !params.accessory;
-    //     break;
-    // }
+    if (datesFiltered) {
+      console.log("Something in the dates!");
+      let newItems = applyFilter(items, "dates", "pdf");
+      items = newItems;
+      return;
+    }
+    if (groupsFiltered) {
+      console.log("Something in the groups!", filters.groups);
+      let newItems = applyFilter(items, "groups", "person");
+      items = newItems;
+      return;
+    }
+    if (categoriesFiltered) {
+      let newItems = applyFilter(items, "categories", "clothing");
+      items = newItems;
+      return;
+    }
+    if (classesFiltered) {
+      console.log("Something in the classes!", filters.classes);
+      let newItems = applyFilter(items, "classes", "class");
+      items = newItems;
+    }
+    if (
+      !datesFiltered &&
+      !groupsFiltered &&
+      !categoriesFiltered &&
+      !classesFiltered
+    ) {
+      items = $costumeList;
+      if (searchTerm) {
+        searchFilter();
+      }
+    }
   };
 
   const handleModal = (id) => {
@@ -187,12 +283,9 @@
   };
 
   const clearResults = () => {
-    console.log("Changing!");
+    console.log("Clearing results");
     searchTerm.trim() === "" ? (items = $costumeList) : null;
   };
-
-  // Set up search and filters to alter what appears? May have to wait until API hookup
-  //onMount(console.log($costumeList))
 </script>
 
 <svelte:head>
@@ -205,14 +298,12 @@
 
 <div class="landing">
   <!-- Filter area -->
-  <!-- <FilterArea {...params} {searchFilter} {handleFilter} {searchTerm} /> -->
-
-  <FilterArea2 />
+   <FilterArea2 />
   <!-- Costume list area -->
   <div id="paginationDiv" class="overflow-auto">
     <div class="costumesWrapper">
       <!-- Search Bar -->
-      <form on:submit|preventDefault={searchFilter}>
+      <form on:submit|preventDefault={() => searchFilter(searchTerm)}>
         <input
           bind:value={searchTerm}
           on:change={clearResults}
