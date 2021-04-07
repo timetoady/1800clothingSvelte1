@@ -28,7 +28,7 @@
   //import FilterArea from "./FilterArea.svelte";
   import FilterArea2 from "./FilterArea2.svelte";
   import CostumeItem from "./CostumeItem.svelte";
-  let items = $costumeList;
+  $: items = $costumeList;
   $: filters = {
     dates: $dateFilters,
     groups: $groupFilters,
@@ -50,10 +50,10 @@
   //Paging parts
   let currentPage = 1;
   let pageSize = 6;
-  $: paginatedItems = paginate({ items, pageSize, currentPage });
   const imageSource = "assets/images/";
   $: console.log(filters);
   $: handleFilter(filters);
+  $: paginatedItems = paginate({ items, pageSize, currentPage });
 
   //modal items
   let gridModalOpen = false;
@@ -152,101 +152,101 @@
       let filter2 = applyFilter(filter1, "groups", "person");
       let filter3 = applyFilter(filter2, "categories", "clothing");
       let filter4 = applyFilter(filter3, "classes", "class");
-      paginatedItems = filter4;
+      items = filter4;
       return;
     }
     if (datesFiltered && groupsFiltered && categoriesFiltered) {
       let filter1 = applyFilter(items, "dates", "pdf");
       let filter2 = applyFilter(filter1, "groups", "person");
       let filter3 = applyFilter(filter2, "categories", "clothing");
-      paginatedItems = filter3;
+      items = filter3;
       return;
     }
     if (classesFiltered && groupsFiltered && categoriesFiltered) {
       let filter1 = applyFilter(items, "classes", "class");
       let filter2 = applyFilter(filter1, "groups", "person");
       let filter3 = applyFilter(filter2, "categories", "clothing");
-      paginatedItems = filter3;
+      items = filter3;
       return;
     }
     if (datesFiltered && classesFiltered && categoriesFiltered) {
       let filter1 = applyFilter(items, "dates", "pdf");
       let filter2 = applyFilter(items, "classes", "class");
       let filter3 = applyFilter(filter2, "categories", "clothing");
-      paginatedItems = filter3;
+      items = filter3;
       return;
     }
     if (datesFiltered && groupsFiltered && classesFiltered) {
       let filter1 = applyFilter(items, "dates", "pdf");
       let filter2 = applyFilter(filter1, "groups", "person");
       let filter3 = applyFilter(items, "classes", "class");
-      paginatedItems = filter3;
+      items = filter3;
       return;
     }
     if (datesFiltered && groupsFiltered) {
       console.log("Dates and Groups!");
       let filter1 = applyFilter(items, "dates", "pdf");
       let filter2 = applyFilter(filter1, "groups", "person");
-      paginatedItems = filter2;
+      items = filter2;
       return;
     }
     if (datesFiltered && categoriesFiltered) {
       console.log("Dates and Categories!");
       let filter1 = applyFilter(items, "dates", "pdf");
       let filter2 = applyFilter(filter1, "categories", "clothing");
-      paginatedItems = filter2;
+      items = filter2;
       return;
     }
     if (datesFiltered && classesFiltered) {
       console.log("Dates and Classes!");
       let filter1 = applyFilter(items, "dates", "pdf");
       let filter2 = applyFilter(filter1, "classes", "class");
-      paginatedItems = filter2;
+      items = filter2;
       return;
     }
     if (groupsFiltered && categoriesFiltered) {
       console.log("Groups and Categories!");
       let filter1 = applyFilter(items, "groups", "person");
       let filter2 = applyFilter(filter1, "categories", "clothing");
-      paginatedItems = filter2;
+      items = filter2;
       return;
     }
     if (groupsFiltered && classesFiltered) {
       console.log("Groups and Classes!");
       let filter1 = applyFilter(items, "groups", "person");
       let filter2 = applyFilter(filter1, "classes", "class");
-      paginatedItems = filter2;
+      items = filter2;
       return;
     }
     if (classesFiltered && categoriesFiltered) {
       console.log("Classes and Categories!");
       let filter1 = applyFilter(items, "classes", "class");
       let filter2 = applyFilter(filter1, "categories", "clothing");
-      paginatedItems = filter2;
+      items = filter2;
       return;
     }
 
     if (datesFiltered) {
       console.log("Something in the dates!");
       let newItems = applyFilter(items, "dates", "pdf");
-      paginatedItems = newItems;
+      items = newItems;
       return;
     }
     if (groupsFiltered) {
       console.log("Something in the groups!", filters.groups);
       let newItems = applyFilter(items, "groups", "person");
-      paginatedItems = newItems;
+      items = newItems;
       return;
     }
     if (categoriesFiltered) {
       let newItems = applyFilter(items, "categories", "clothing");
-      paginatedItems = newItems;
+      items = newItems;
       return;
     }
     if (classesFiltered) {
       console.log("Something in the classes!", filters.classes);
       let newItems = applyFilter(items, "classes", "class");
-      paginatedItems = newItems;
+      items = newItems;
     }
 
     if (
