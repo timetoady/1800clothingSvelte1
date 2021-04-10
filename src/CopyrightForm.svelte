@@ -144,4 +144,20 @@
   .submitBtn:hover {
     background-color: rgb(65, 65, 65);
   }
+
+  @media screen and (max-width: 900px) {
+    .CopyrightForm {
+      height: 100%;
+      width: 100%;
+      border-radius: none;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .formDetails {
+      padding: 0 30px;
+    }
+    .exitBtn {
+      left: 15px;
+    }
+  }
 </style>

@@ -400,6 +400,9 @@
       height: unset;
       position: relative;
     }
+    .formLinks {
+      display: none;
+    }
     /* .mobileSearchBox {
       display: block;
       width: 100%;
