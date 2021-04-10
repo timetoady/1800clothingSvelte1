@@ -1,10 +1,10 @@
 <script>
-
+  export let toggleContactForm
 </script>
 
 <div class="copyrightFormBackground">
   <form class="CopyrightForm">
-    <div class="exitBtn">
+    <div class="exitBtn" on:click={toggleContactForm}>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
@@ -23,13 +23,18 @@
       <label for="noOption">No</label>
     </div>
     <div class="submitBar">
-      <div class="cancelBtn">Cancel</div>
+      <div class="cancelBtn" on:click={toggleContactForm}>Cancel</div>
       <button class="submitBtn">Submit</button>
     </div>
   </form>
 </div>
 
 <style>
+  @keyframes fadeInOpacity {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
   .copyrightFormBackground {
     background-color: rgba(0, 0, 0, 0.541);
     position: fixed;
@@ -39,6 +44,13 @@
     height: 100vh;
     display: grid;
     place-items: center;
+
+    /* animation */
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.2s;
   }
 
   .CopyrightForm {
@@ -59,6 +71,9 @@
     top: 15px;
     left: 20px;
     cursor: pointer;
+  }
+  .exitBtn:hover {
+    background-color: rgb(228, 228, 228);
   }
   .exitBtn svg {
     width: 16px;
@@ -112,14 +127,21 @@
   }
   .cancelBtn, .submitBtn {
     padding: 10px 40px;
+    border-radius: 5px;
   }
   .cancelBtn {
     cursor: pointer;
+    margin-right: 10px;
+  }
+  .cancelBtn:hover {
+    background-color: rgb(251, 251, 251);
   }
   .submitBtn {
     background-color: rgb(41, 41, 41);
     border: none;
     color: white;
-    border-radius: 5px;
+  }
+  .submitBtn:hover {
+    background-color: rgb(65, 65, 65);
   }
 </style>
