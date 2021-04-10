@@ -353,13 +353,16 @@
   div.filters {
     width: 100%;
     border-right: 1px solid rgba(128, 128, 128, 0.5);
-    background-color: #ddd;
+    background-color: rgb(241, 229, 212);
     position: relative;
   }
   .filters h5 {
     margin: 0;
     padding: 0.25rem 0.75rem;
-    background-color: #888;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+  }
+  .collapseContainer {
+    background-color: white;
   }
   .collapsed {
     border-bottom: 1px solid rgba(128, 128, 128, 0.5);

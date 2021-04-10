@@ -23,57 +23,59 @@
 
 <div class="theBook">
   <div class="navigation">
-    <h5>The Book</h5>
-    <Nav vertical>
-      <NavItem>
-        <label on:click={() => handleViewerUpdate("1800-1819")}>
-          1800-1819
-          <input type="radio" name="chapter" />
-        </label>
-      </NavItem>
-      <NavItem>
-        <label on:click={() => handleViewerUpdate("1820-1829")}>
-          1820-1829
-          <input type="radio" name="chapter" />
-        </label>
-      </NavItem>
-      <NavItem>
-        <label on:click={() => handleViewerUpdate("1830s")}>
-          1830-1839
-          <input type="radio" name="chapter" />
-        </label>
-      </NavItem>
-      <NavItem>
-        <label on:click={() => handleViewerUpdate("1840s")}>
-          1840-1849
-          <input type="radio" name="chapter" />
-        </label>
-      </NavItem>
-      <NavItem>
-        <label on:click={() => handleViewerUpdate("1850s")}>
-          1850-1859
-          <input type="radio" name="chapter" />
-        </label>
-      </NavItem>
-      <NavItem>
-        <label on:click={() => handleViewerUpdate("1860s")}>
-          1860-1869
-          <input type="radio" name="chapter" />
-        </label>
-      </NavItem>
-      <NavItem>
-        <label on:click={() => handleViewerUpdate("1870s")}>
-          1870-1879
-          <input type="radio" name="chapter" />
-        </label>
-      </NavItem>
-      <NavItem>
-        <label on:click={() => handleViewerUpdate("1880s")}>
-          1880-1889
-          <input type="radio" name="chapter" />
-        </label>
-      </NavItem>
-    </Nav>
+    <h5>Books</h5>
+    <div class="navigationBackground">
+      <Nav vertical>
+        <NavItem>
+          <label on:click={() => handleViewerUpdate("1800-1819")}>
+            1800-1819
+            <input type="radio" name="chapter" />
+          </label>
+        </NavItem>
+        <NavItem>
+          <label on:click={() => handleViewerUpdate("1820-1829")}>
+            1820-1829
+            <input type="radio" name="chapter" />
+          </label>
+        </NavItem>
+        <NavItem>
+          <label on:click={() => handleViewerUpdate("1830s")}>
+            1830-1839
+            <input type="radio" name="chapter" />
+          </label>
+        </NavItem>
+        <NavItem>
+          <label on:click={() => handleViewerUpdate("1840s")}>
+            1840-1849
+            <input type="radio" name="chapter" />
+          </label>
+        </NavItem>
+        <NavItem>
+          <label on:click={() => handleViewerUpdate("1850s")}>
+            1850-1859
+            <input type="radio" name="chapter" />
+          </label>
+        </NavItem>
+        <NavItem>
+          <label on:click={() => handleViewerUpdate("1860s")}>
+            1860-1869
+            <input type="radio" name="chapter" />
+          </label>
+        </NavItem>
+        <NavItem>
+          <label on:click={() => handleViewerUpdate("1870s")}>
+            1870-1879
+            <input type="radio" name="chapter" />
+          </label>
+        </NavItem>
+        <NavItem>
+          <label on:click={() => handleViewerUpdate("1880s")}>
+            1880-1889
+            <input type="radio" name="chapter" />
+          </label>
+        </NavItem>
+      </Nav>
+    </div>
   </div>
   <div class="viewer">
     <div class="bookBox">
@@ -95,14 +97,17 @@
   .navigation {
     min-width: 209px;
     border-right: 1px solid rgba(128, 128, 128, 0.5);
-    background-color: #ddd;
+    background-color: rgb(235, 221, 205);
     max-height: calc(100vh - 60px);
     height: 100%;
   }
   .navigation h5 {
     margin: 0;
     padding: 0.25rem 0.75rem;
-    background-color: #888;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+  }
+  .navigationBackground {
+    background-color: white;
   }
   .download {
     text-align: right;

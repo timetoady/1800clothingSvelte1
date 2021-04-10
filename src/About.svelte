@@ -11,7 +11,7 @@
 </svelte:head>
 
 <div class="About">
-  <div class="contentWrapper">
+  <div class="welcomeMessageBackground">
     <div class="welcomeMessage">
       <h2>About</h2>
       <p>
@@ -20,7 +20,9 @@
         we hope you find what you are looking for. 
       </p>
     </div>
+  </div>
   
+  <div class="contentWrapper">
     <div class="aboutCard">
       <h2 class="cardTitle">Where It All Started</h2>
       <div class="cardContent carmaContent">
@@ -72,36 +74,7 @@
         </div>
       </div>
     </div>
-  
-    <div class="aboutCard">
-      <h2 class="cardTitle">New Contributions or Copyright Claims</h2>
-      <div class="cardContent">
-        <p>
-          1800clothingCatalog@gmail.com<br>
-          If you would like to contribute an image and description to 1800clothing.org, please send an email with the following:<br>
-          <br>
-          Contributor Name:<br>
-          <br>
-          Email Address:<br>
-          <br>
-          Phone # (for clarification and questions)<br>
-          <br>
-          Attatch image in full size<br>
-          <br>
-          Date of clothing in image: 18__<br>
-          <br>
-          Description of clothing in image<br>
-          <br>
-          Who owns this image?<br>
-          <br>
-          Is it copyright free?<br>
-          <br>
-          Will the owner give permission for 1800costumes.org to display this image for no cost?<br>
-          <br>
-          For copyright claims tell us the image in question and if you would like for it to be removed from the site
-        </p>
-      </div>
-    </div>
+    
   </div>
 </div>
 
@@ -109,7 +82,6 @@
   .About {
     background-color: white;
     height: calc(100vh - 60px);
-    padding: 20px;
     box-sizing: border-box;
     margin: 0 auto;
     overflow-y: scroll;
@@ -120,12 +92,15 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-
+  .welcomeMessageBackground {
+    background-color: rgb(235, 221, 205);
+  }
   .welcomeMessage {
+    padding: 50px 0;
     width: 600px;
     margin: 0 auto;
-    margin-top: 10px;
     text-align: center;
+    background-color: rgb(235, 221, 205);
   }
   .welcomeMessage h2 {
     padding: 0;
@@ -133,19 +108,19 @@
     margin: 0;
   }
   .welcomeMessage p {
-    padding-bottom: 20px;
+    font-size: 20px;
+    padding: 0 20px;
   }
 
   .aboutCard {
     border-radius: 10px;
     box-shadow: 1px 1px 6px 0px rgba(0,0,0,0.24);
     padding: 20px 30px;
-    margin-bottom: 40px;
+    margin: 40px 0;
   }
   .aboutCard .cardTitle {
     border-bottom: 1px solid rgb(151, 151, 151);
     padding: 8px;
-    margin-bottom: 20px;
   }
   .carmaContent {
     display: grid;
@@ -165,6 +140,10 @@
   @media screen and (max-width: 600px) {
     .welcomeMessage {
       width: 100%;
+    }
+    .welcomeMessage p {
+      font-size: 18px;
+      padding: 0 20px;
     }
   }
 </style>
