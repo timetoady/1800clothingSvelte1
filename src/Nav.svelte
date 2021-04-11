@@ -10,7 +10,9 @@
       <Link to="/"
         ><img
           class="title"
-          src="./assets/1800sClothingLogo.png"
+
+          src="./assets/logo.png"
+
           alt="1800clothing.org"
         /></Link
       >
@@ -34,6 +36,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    padding-left: 10px;
   }
   header img {
     max-height: 60px;

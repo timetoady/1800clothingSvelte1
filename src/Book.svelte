@@ -116,19 +116,16 @@
     width: 70vw;
     padding: 0.2rem 2rem;
   }
-
   .viewerBox iframe {
     width: 100%;
     height: 80vh;
   }
-
   a.download {
     text-align: right;
   }
   div.bookBox {
     text-align: right;
   }
-
   @media screen and (max-width: 900px) {
     .theBook {
       flex-direction: column;
@@ -142,9 +139,9 @@
       text-align: center;
     }
     .viewer {
-    margin: 0;
-    padding: .2rem;
-  }
+      margin: 0;
+      padding: .2rem;
+    }
     .viewerBox {
       width: 100%;
       padding: 0.2rem;
@@ -154,12 +151,11 @@
       height: 80vh;
     }
     a.download {
-    text-align: center;
-    padding-right: 0;
-    
-  }
-  div.bookBox {
-    text-align: center;
-  }
+      text-align: center;
+      padding-right: 0;
+    }
+    div.bookBox {
+      text-align: center;
+    }
   }
 </style>
