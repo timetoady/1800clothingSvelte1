@@ -7,6 +7,14 @@
 
   } from "sveltestrap";
 
+  import CopyrightForm from './CopyrightForm.svelte'
+
+  let showContactForm = false
+
+  const toggleContactForm = () => {
+    showContactForm = !showContactForm
+  }
+
   import Fa from "svelte-fa";
   import { faFilter } from "@fortawesome/free-solid-svg-icons";
   import { costumeList, dateFilters, groupFilters, categoryFilters, classFilters } from "./stores"
@@ -329,6 +337,15 @@
       </form>
     {/if}
   </Nav>
+
+  <div class="formLinks">
+    <div class="linkText">Copyright claim? <div class="formLink" on:click={toggleContactForm}>Click here.</div></div>
+    <div class="linkText">Have an image to contribute? <div class="formLink">Click here.</div></div>
+  </div>
+
+  {#if showContactForm}
+    <CopyrightForm {toggleContactForm} />
+  {/if}
 </div>
 
 <style>
@@ -336,12 +353,16 @@
   div.filters {
     width: 100%;
     border-right: 1px solid rgba(128, 128, 128, 0.5);
-    background-color: #ddd;
+    background-color: rgb(241, 229, 212);
+    position: relative;
   }
   .filters h5 {
     margin: 0;
     padding: 0.25rem 0.75rem;
-    background-color: #888;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+  }
+  .collapseContainer {
+    background-color: white;
   }
   .collapsed {
     border-bottom: 1px solid rgba(128, 128, 128, 0.5);
@@ -349,6 +370,23 @@
   .collapsed label {
     text-transform: capitalize;
   }
+
+  .formLinks {
+    font-size: 12px;
+    bottom: 0;
+    position: absolute;
+    max-width: 100%;
+    padding: 15px;
+  }
+  .linkText {
+    padding-top: 8px;
+  }
+  .formLink {
+    display: inline-block;
+    cursor: pointer;
+    color: blue;
+  }
+
   /* .mobileSearchBox {
     display: none;
   } */
@@ -361,6 +399,9 @@
       background-color: #ddd;
       height: unset;
       position: relative;
+    }
+    .formLinks {
+      display: none;
     }
     /* .mobileSearchBox {
       display: block;

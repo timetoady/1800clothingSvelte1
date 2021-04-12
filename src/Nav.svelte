@@ -30,7 +30,7 @@
 
 <style>
   header {
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(208, 187, 164);
     padding: 0;
     display: flex;
     justify-content: space-between;
@@ -52,8 +52,9 @@
   .viewButton {
     border-radius: 8px;
     color: white;
-    background-color: #333;
+    background-color: rgb(26, 26, 26);
     padding: 5px 10px;
+    border: none;
   }
 
   @media screen and (max-width: 700px) {

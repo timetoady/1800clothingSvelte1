@@ -4,9 +4,6 @@
   import About from "./About.svelte";
   import Book from "./Book.svelte";
   import Nav from "./Nav.svelte";
-
-  export let url = "";
-  //$: console.log(url)
 </script>
 
 <svelte:head>
