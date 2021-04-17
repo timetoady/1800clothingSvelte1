@@ -1,11 +1,11 @@
 <script>
-  export let item, imageSource, handleModal;
+  export let item, imageSource, handleModal, thumbSource;
 </script>
 
 <li class="item">
   <div class="cardBody" on:click={() => handleModal(item.id)}>
     <img
-      src="{imageSource}{item.image}"
+      src="{thumbSource}{item.thumbnail}"
       alt={item.caption}
       loading="lazy"
     />

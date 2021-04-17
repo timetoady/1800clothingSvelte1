@@ -53,6 +53,7 @@
   let currentPage = 1;
   let pageSize = 12;
   const imageSource = "assets/images/";
+  const thumbSource = "assets/thumbnails/"
   $: console.log(filters);
   $: handleFilter(filters);
   $: paginatedItems = paginate({ items, pageSize, currentPage });
@@ -321,7 +322,7 @@
       </form>
       <ul class="items costumeGrid ">
         {#each paginatedItems as item}
-          <CostumeItem {item} {handleModal} {imageSource} />
+          <CostumeItem {item} {handleModal} {imageSource} {thumbSource}/>
         {/each}
       </ul>
       <LightPaginationNav
