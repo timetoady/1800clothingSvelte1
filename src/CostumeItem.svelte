@@ -1,5 +1,5 @@
 <script>
-  export let item, imageSource, handleModal, thumbSource;
+  export let item, handleModal, thumbSource;
 </script>
 
 <li class="item">
