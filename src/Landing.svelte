@@ -72,6 +72,7 @@
         return item;
       }
     });
+    currentPage = 1
     return newItems;
   };
 
