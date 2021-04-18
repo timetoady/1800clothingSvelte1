@@ -1,8 +1,4 @@
 <script>
-
-
-  //next, add form binding to variables, then a $ object that updates with those, to use in filter to render objects.
-  import { onMount } from "svelte";
   import {
     Modal,
     ModalHeader,
@@ -10,7 +6,10 @@
     ModalFooter,
     Button,
   } from "sveltestrap";
+  import Fa from "svelte-fa";
+  import { faDownload } from "@fortawesome/free-solid-svg-icons";
   import { paginate, LightPaginationNav } from "svelte-paginate";
+  import { fade, fly } from "svelte/transition";
   import {
     classFilters,
     costumeList,
@@ -53,13 +52,14 @@
   let currentPage = 1;
   let pageSize = 12;
   const imageSource = "assets/images/";
-  const thumbSource = "assets/thumbnails/"
+  const thumbSource = "assets/thumbnails/";
   $: console.log(filters);
   $: handleFilter(filters);
   $: paginatedItems = paginate({ items, pageSize, currentPage });
 
   //modal items
   let gridModalOpen = false;
+  let viewDownload = false;
 
   //Utility function to apply filter. Can be exported.
   const applyFilter = (thingToFilter, thingToFilterBy, thingInJSON) => {
@@ -75,7 +75,7 @@
     return newItems;
   };
 
-//Set search items
+  //Set search items
   function setSearch() {
     if (searchTerm.trim() !== "" && searchResults !== []) {
       console.log("Search Result is: ", searchResults);
@@ -92,7 +92,7 @@
     searchResults = [];
   }
 
-//Primary function responsible for filtering items by the searchTerm.
+  //Primary function responsible for filtering items by the searchTerm.
   const searchFilter = () => {
     console.log("Search term is:", searchTerm);
 
@@ -109,16 +109,16 @@
       resetItems();
       return;
     }
-    if (searchTerm && filterState){
+    if (searchTerm && filterState) {
       handleFilter(filters);
       searchResults = [];
     }
-    if(filterState){
+    if (filterState) {
       handleFilter(filters);
       searchResults = [];
-      items = paginatedItems
+      items = paginatedItems;
     }
-    console.log("Paginated items", paginatedItems)
+    console.log("Paginated items", paginatedItems);
     for (const entry of items) {
       if (
         entry.caption
@@ -304,9 +304,11 @@
   <link rel="stylesheet" href="landingStyles.css" />
 </svelte:head>
 
+<svelte:window bind:scrollY={y} />
+
 <div class="landing">
   <!-- Filter area -->
-   <FilterArea2 />
+  <FilterArea2 />
   <!-- Costume list area -->
   <div id="paginationDiv" class="overflow-auto">
     <div class="costumesWrapper">
@@ -322,7 +324,7 @@
       </form>
       <ul class="items costumeGrid ">
         {#each paginatedItems as item}
-          <CostumeItem {item} {handleModal} {imageSource} {thumbSource}/>
+          <CostumeItem {item} {handleModal} {imageSource} {thumbSource} />
         {/each}
       </ul>
       <LightPaginationNav
@@ -331,7 +333,10 @@
         {currentPage}
         limit={2}
         showStepOptions={true}
-        on:setPage={(e) => (currentPage = e.detail.page)}
+        on:setPage={(e) => {
+          currentPage = e.detail.page;
+          y = 0;
+        }}
       />
     </div>
   </div>
@@ -339,26 +344,43 @@
   <Modal isOpen={gridModalOpen} toggle={handleModal} size="lg">
     <ModalHeader toggle={handleModal}>{$currentCostume.caption}</ModalHeader>
     <ModalBody>
-      <div class="cardModalBody">
-        <div class="cardModalImage">
-          <img
-            src="{imageSource}{$currentCostume.image}"
-            alt={$currentCostume.caption}
-          />
-        </div>
-        <div class="modalDetails overflow-auto">
-          {#if $currentCostume.description === ""}
-            {""}
-          {:else}
+      <div>
+        <div class="cardModalBody">
+          <div
+            class="cardModalImage"
+            on:mouseenter={() => (viewDownload = true)}
+            on:mouseleave={() => (viewDownload = false)}
+          >
+            <img
+              src="{imageSource}{$currentCostume.image}"
+              alt={$currentCostume.caption}
+            />
+            {#if viewDownload}
+              <div
+                class="modalImgDownload"
+                in:fly={{ y: 30, duration: 500 }}
+                out:fade
+              >
+                <a href="{imageSource}{$currentCostume.image}" download
+                  >Download Image <Fa icon={faDownload} /></a
+                >
+              </div>
+            {/if}
+          </div>
+          <div class="modalDetails overflow-auto">
+            {#if $currentCostume.description === ""}
+              {""}
+            {:else}
+              <p>
+                <strong>Description: </strong>{$currentCostume.description}
+              </p>
+            {/if}
             <p>
-              <strong>Description: </strong>{$currentCostume.description}
+              <strong>Source: </strong>{$currentCostume.source === ""
+                ? "Currently unknown."
+                : $currentCostume.source}
             </p>
-          {/if}
-          <p>
-            <strong>Source: </strong>{$currentCostume.source === ""
-              ? "Currently unknown."
-              : $currentCostume.source}
-          </p>
+          </div>
         </div>
       </div>
     </ModalBody>
@@ -425,6 +447,14 @@
   }
   #paginationDiv form {
     padding: 1rem 1rem 0 1rem;
+  }
+
+  .modalImgDownload {
+    text-align: right;
+    margin-top: -2.5rem;
+    background-color: rgba(208, 187, 164, 0.808);
+    padding: 0.5rem;
+    position: relative;
   }
 
   @media screen and (max-width: 1500px) {
