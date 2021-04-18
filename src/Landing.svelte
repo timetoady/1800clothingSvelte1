@@ -304,7 +304,7 @@
   <link rel="stylesheet" href="landingStyles.css" />
 </svelte:head>
 
-<svelte:window bind:scrollY={y} />
+<!-- <svelte:window bind:scrollY={y} /> -->
 
 <div class="landing">
   <!-- Filter area -->
@@ -335,7 +335,7 @@
         showStepOptions={true}
         on:setPage={(e) => {
           currentPage = e.detail.page;
-          y = 0;
+          // y = 0;
         }}
       />
     </div>
@@ -452,9 +452,13 @@
   .modalImgDownload {
     text-align: right;
     margin-top: -2.5rem;
-    background-color: rgba(208, 187, 164, 0.808);
+    background-color: rgba(0, 0, 0, 0.808);
     padding: 0.5rem;
     position: relative;
+  }
+
+  .modalImgDownload a{
+    color: #f2f2f2;
   }
 
   @media screen and (max-width: 1500px) {
