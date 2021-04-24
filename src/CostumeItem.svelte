@@ -14,18 +14,10 @@
     </div>
   </div>
   <div class="cardFooter">
-    <button>
-      {item.pdf}
-    </button>
-    <button>
-      {item.person}
-    </button>
-    <button>
-      {item.class}
-    </button>
-    <button>
-      {item.clothing}
-    </button>
+    <div class="cardBtn">{item.pdf}</div>
+    <div class="cardBtn">{item.person}</div>
+    <div class="cardBtn">{item.class}</div>
+    <div class="cardBtn">{item.clothing}</div>
   </div>
 </li>
 
@@ -56,13 +48,15 @@
     overflow: hidden; /* hides tags that are too long. change this in the future */
   }
 
-  .cardFooter button {
+  .cardFooter .cardBtn {
     border-radius: 20px;
     background-color: rgb(236, 236, 236);
-    padding: 0.25rem 0.7rem;
+    padding: 4px 11px;
     text-transform: capitalize;
     border: none;
-    margin-right: 7px;
+    margin-right: 4px;
+    display: inline-block;
+    font-size: 16px;
   }
   .cardBody img {
     height: auto;
