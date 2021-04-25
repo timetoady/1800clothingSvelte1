@@ -341,54 +341,69 @@
       />
     </div>
   </div>
-  <!-- Dynamic grid tile modal -->
-  <Modal isOpen={gridModalOpen} toggle={handleModal} size="lg">
-    <ModalHeader toggle={handleModal}>{$currentCostume.caption}</ModalHeader>
-    <ModalBody>
-      <div>
-        <div class="cardModalBody">
-          <div
-            class="cardModalImage"
-            on:mouseenter={() => (viewDownload = true)}
-            on:mouseleave={() => (viewDownload = false)}
-          >
-            <img
-              src="{imageSource}{$currentCostume.image}"
-              alt={$currentCostume.caption}
-            />
-            {#if viewDownload}
-              <div
-                class="modalImgDownload"
-                in:fly={{ y: 30, duration: 500 }}
-                out:fade
-              >
-                <a href="{imageSource}{$currentCostume.image}" download
-                  >Download Image <Fa icon={faDownload} /></a
+  <!-- grid tile modal -->
+  {#if gridModalOpen}
+    <div class="costumeModalBackground">
+      <div class="costumeModal">
+        <div class="exitBtn" on:click={toggleModal}>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </div>
+        <div class="costumeModalHeader">
+          <h1>{$currentCostume.caption}</h1>
+        </div>
+
+        <div class="costumeModalBody">
+          <div class="modalImageArea">
+            <div
+              class="cardModalImage"
+              on:mouseenter={() => (viewDownload = true)}
+              on:mouseleave={() => (viewDownload = false)}
+            >
+              <img
+                src="{imageSource}{$currentCostume.image}"
+                alt={$currentCostume.caption}
+              />
+              {#if viewDownload}
+                <div
+                  class="modalImgDownload"
+                  in:fly={{ y: 0, duration: 250 }}
+                  out:fade
                 >
+                  <a href="{imageSource}{$currentCostume.image}" download
+                    >Download Image <Fa icon={faDownload} /></a
+                  >
+                </div>
+              {/if}
+            </div>
+          </div>
+
+          <div class="modalDataArea">
+            {#if $currentCostume.description === ""}
+              {"No description provided."}
+            {:else}
+              <h2 class="descTitle">Description</h2>
+              <div class="descContent">
+                {$currentCostume.description}
               </div>
             {/if}
-          </div>
-          <div class="modalDetails overflow-auto">
-            {#if $currentCostume.description === ""}
-              {""}
-            {:else}
-              <p>
-                <strong>Description: </strong>{$currentCostume.description}
-              </p>
-            {/if}
-            <p>
+            <div class="costumeSrc">
               <strong>Source: </strong>{$currentCostume.source === ""
                 ? "Currently unknown."
                 : $currentCostume.source}
-            </p>
+            </div>
           </div>
+          
+        </div>
+        <div class="costumeModalFooter">
+          <div class="costumeInfoBtn">{$currentCostume.pdf}</div>
+          <div class="costumeInfoBtn">{$currentCostume.person}</div>
+          <div class="costumeInfoBtn">{$currentCostume.clothing}</div>
         </div>
       </div>
-    </ModalBody>
-    <ModalFooter>
-      <Button color="secondary" on:click={toggleModal}>CLOSE</Button>
-    </ModalFooter>
-  </Modal>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -398,6 +413,7 @@
     grid-template-columns: 210px auto;
     height: 100%;
     width: 100%;
+    position: relative;
   }
 
   .costumesWrapper {
@@ -416,22 +432,124 @@
     margin-bottom: 0;
   }
 
-  .cardModalBody {
-    display: flex;
+  @keyframes fadeInOpacity {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .costumeModalBackground {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.541);
+    display: grid;
+    place-items: center;
+
+    /* animation */
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.2s;
+  }
+  .costumeModal {
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.288);
+    width: 900px;
+    border-radius: 6px;
+    position: relative;
+    padding-bottom: 60px;
+  }
+
+  .exitBtn {
+    padding: 5px;
+    background-color: rgb(235, 235, 235);
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+  }
+  .exitBtn:hover {
+    background-color: rgb(228, 228, 228);
+  }
+  .exitBtn svg {
+    width: 16px;
+    position: relative;
+    top: -6px;
+    left: -1px;
+  }
+
+  .costumeModalHeader {
+    padding: 20px;
+    padding-bottom: 0;
+    margin: 0;
+  }
+  .costumeModalHeader h1 {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1.4;
+    padding-right: 30px;
+  }
+
+  .costumeModalBody {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-gap: 20px;
+    padding: 20px;
+  }
+  .modalImageArea {
+
   }
   .cardModalImage {
-    min-width: 15rem;
     width: 100%;
+    max-height: 400px;
   }
   .cardModalImage img {
     max-width: 100%;
-    max-height: 68vh;
-    align-items: center;
-    margin: 0 auto;
+    max-height: 400px;
   }
-  .modalDetails {
-    padding: 0 0.5rem;
-    margin-top: 0 !important;
+
+  .modalDataArea {
+    
+  }
+  .modalDataArea .descTitle {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .modalDataArea .descContent {
+    overflow-y: scroll;
+    max-height: 250px;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 6px;
+    padding: 5px;
+  }
+  .modalDataArea .costumeSrc {
+    margin-top: 10px;
+  }
+
+  .costumeModalFooter {
+    border-top: 1px solid rgb(211, 211, 211);
+    position: absolute; 
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+  .costumeModalFooter .costumeInfoBtn {
+    border-radius: 20px;
+    background-color: rgb(236, 236, 236);
+    padding: 4px 11px;
+    text-transform: capitalize;
+    border: none;
+    margin-right: 13px;
+    display: inline-block;
+    font-size: 16px;
   }
 
   .overflow-auto {
@@ -483,6 +601,29 @@
   @media screen and (max-width: 700px) {
     .landing {
       grid-template-columns: 1fr;
+    }
+  }
+
+  /* costume modal media queries */
+  @media screen and (max-width: 930px) {
+    .costumeModal {
+      width: 95%;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .costumeModal {
+      height: 95%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .costumeModalBackground {
+      overflow-y: scroll;
+    }
+    .costumeModalBody {
+      grid-template-columns: 1fr;
+      padding-bottom: 70px;
     }
   }
 </style>

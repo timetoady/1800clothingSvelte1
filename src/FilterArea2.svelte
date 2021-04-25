@@ -456,9 +456,6 @@
         Click here.
       </div>
     </div>
-    <div class="linkText">
-      Have an image to contribute? <div class="formLink">Click here.</div>
-    </div>
   </div>
 
   {#if showContactForm}

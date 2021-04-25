@@ -2,8 +2,8 @@
   export let item, handleModal, thumbSource;
 </script>
 
-<li class="item">
-  <div class="cardBody" on:click={() => handleModal(item.id)}>
+<li class="item" on:click={() => handleModal(item.id)}>
+  <div class="cardBody">
     <img
       src="{thumbSource}{item.thumbnail}"
       alt={item.caption}
@@ -16,7 +16,6 @@
   <div class="cardFooter">
     <div class="cardBtn">{item.pdf}</div>
     <div class="cardBtn">{item.person}</div>
-    <div class="cardBtn">{item.class}</div>
     <div class="cardBtn">{item.clothing}</div>
   </div>
 </li>
@@ -30,6 +29,12 @@
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.14);
+    transition: all ease 0.3s;
+    top: 0;
+  }
+  .item:hover {
+    top: 4px;
+    background-color: rgb(252, 252, 252);
   }
   .item .cardBody {
     display: grid;
