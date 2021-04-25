@@ -69,7 +69,7 @@
     height: 24px;
     border-radius: 50%;
     top: 15px;
-    left: 20px;
+    right: 20px;
     cursor: pointer;
   }
   .exitBtn:hover {
@@ -157,7 +157,7 @@
       padding: 0 30px;
     }
     .exitBtn {
-      left: 15px;
+      right: 15px;
     }
   }
 </style>
