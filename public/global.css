@@ -8,6 +8,10 @@ html {
   box-sizing: inherit;
 }
 
+::selection {
+  background: rgb(241, 229, 212);
+}
+
 * {
 	font-family: Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
