@@ -85,12 +85,14 @@
     } else {
       items = $costumeList;
       searchResults = [];
+      currentPage = 1
     }
   }
 
   function resetItems() {
     items = $costumeList;
     searchResults = [];
+    currentPage = 1
   }
 
   //Primary function responsible for filtering items by the searchTerm.
