@@ -327,7 +327,9 @@
       </form>
       <ul class="items costumeGrid ">
         {#each paginatedItems as item}
+        {#if item.image !== "not found"}
           <CostumeItem {item} {handleModal} {imageSource} {thumbSource} />
+          {/if}
         {/each}
       </ul>
       <LightPaginationNav

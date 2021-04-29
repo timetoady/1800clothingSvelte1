@@ -48,7 +48,9 @@
   .aboutButton {
     background-color: unset;
     border: none;
+    margin-right: .45rem !important;
   }
+
   .viewButton {
     border-radius: 8px;
     color: white;
