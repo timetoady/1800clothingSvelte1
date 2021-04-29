@@ -3,7 +3,7 @@
 </script>
 
 <div class="copyrightFormBackground">
-  <form method="POST" data-netlify="true" name="copywright" class="CopyrightForm">
+  <form name="copyright" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="CopyrightForm">
     <div class="exitBtn" on:click={toggleContactForm}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -52,12 +52,10 @@
       <input type="radio" id="noOption" name="deleteOption" value="no" />
       <label for="noOption">No</label>
     </div>
-    <div class="field">
-      <div data-netlify-recaptcha="true"></div>
-    </div>
+      
     <div class="submitBar">
       <div class="cancelBtn" on:click={toggleContactForm}>Cancel</div>
-      <button class="submitBtn">Submit</button>
+      <button class="submitBtn" type="submit">Submit</button>
     </div>
   </form>
 </div>
