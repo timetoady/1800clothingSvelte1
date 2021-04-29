@@ -3,7 +3,7 @@
 </script>
 
 <div class="copyrightFormBackground">
-  <form action="POST" data-netlify="true" class="CopyrightForm">
+  <form method="POST" data-netlify="true" name="copywright" class="CopyrightForm">
     <div class="exitBtn" on:click={toggleContactForm}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
