@@ -1,105 +1,47 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# 1800s Clothing
 
----
-
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+1. Introduction
+2. History
+3. Structure and Features of this version
+4. Future enhancements
 
 
-## Get started
+## Introduction 
 
-Install the dependencies...
+The intention of the 1800s Clothing site is to provide period-accurate images of clothing from the 1800s. It's value proposition is the accuracy and addition information provided by a pair of experts from their compiled research. Carma de Jong Anderson, and Lorie Davis. This information is presented in tiles with the picture, description, and additional details. It's intended for artists, authors, historians, and costume designers to have correct information for their research and projects.
 
-```bash
-cd svelte-app
-npm install
-```
+In this readme, we'll briefly note the site's bumpy version history. Following, some information on the structure and features of the site in this incarnation, including the file structure and technology used. Finally, we'll layout a few possible directions that the site can be taken in for improvement.
 
-...then start [Rollup](https://rollupjs.org):
+## History
 
-```bash
-npm run dev
-```
+The site began it's life as a group project in the Computer Science area of Utah Valley University. The initial site had many problems: it had little input from UX design, links that broke the CSS if pressed in a certain combination, and a database written in some inscrutable form of PHP that sometimes simply refused to load. Add to that, the actual content was what the client wanted presented, and the quality of the images used was low. There was also absolutely no documentation of the structure, setup, functions, or technology used in the code.
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Version 2 of the site began as a desire from the client for a backend to be added to add additional entries. But it was quickly apparent to the Digital Media group (also at UVU) who took on the project that giving the ability to add entries to a site who looked and worked so poorly would be pointless. That idea was scrapped, and the effort of v2 was to simply revise the site in simple HTML and CSS with a few small vanilla JavaScript functions to fix all broken links, and load the clothing images and their information promptly. The styling was only simply revised, and little consideration was taken into true UX design: the goal was simply to get a working product out the door.
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+By the end of version 2, a working version was completed and uploaded to Bluehost where 1800clothing.org is hosted, but it was clear to the developers of this version (that's us) that a lot more would need to be to move the site from "working" to "usable". Thus, this version, Version 3.
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
+## Structure and Features
 
-## Building and running in production mode
+### Design
 
-To create an optimised version of the app:
+//Emma here
 
-```bash
-npm run build
-```
+### Technologies
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+The main site was built in [Svelte](https://svelte.dev/), a modern and very fast JavaScript framework that compiles all of it's simplified language into vanilla JavaScript, CSS, and HTML. Svelte, similar to React, works best be as components nested together. It serves the site from the src folder, and compiles into the public folder, which is where the site is served when deployed.
+
+Database: 
 
 
-## Single-page app mode
+### Structure
 
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
 
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
 
-```js
-"start": "sirv public --single"
-```
 
-## Using TypeScript
+## Future Enhancements
 
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
+* True database
+* Backend to update DB
+* Applied SEO
+* Improved mobile functionality
 
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
