@@ -72,7 +72,7 @@
         return item;
       }
     });
-    currentPage = 1
+    currentPage = 1;
     return newItems;
   };
 
@@ -85,14 +85,14 @@
     } else {
       items = $costumeList;
       searchResults = [];
-      currentPage = 1
+      currentPage = 1;
     }
   }
 
   function resetItems() {
     items = $costumeList;
     searchResults = [];
-    currentPage = 1
+    currentPage = 1;
   }
 
   //Primary function responsible for filtering items by the searchTerm.
@@ -327,8 +327,8 @@
       </form>
       <ul class="items costumeGrid ">
         {#each paginatedItems as item}
-        {#if item.image !== "not found"}
-          <CostumeItem {item} {handleModal} {imageSource} {thumbSource} />
+          {#if item.image !== "not found"}
+            <CostumeItem {item} {handleModal} {imageSource} {thumbSource} />
           {/if}
         {/each}
       </ul>
@@ -350,8 +350,19 @@
     <div class="costumeModalBackground">
       <div class="costumeModal">
         <div class="exitBtn" on:click={toggleModal}>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </div>
         <div class="costumeModalHeader">
@@ -398,7 +409,6 @@
                 : $currentCostume.source}
             </div>
           </div>
-          
         </div>
         <div class="costumeModalFooter">
           <div class="costumeInfoBtn">{$currentCostume.pdf}</div>
@@ -437,8 +447,12 @@
   }
 
   @keyframes fadeInOpacity {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   .costumeModalBackground {
@@ -505,9 +519,6 @@
     grid-gap: 20px;
     padding: 20px;
   }
-  .modalImageArea {
-
-  }
   .cardModalImage {
     width: 100%;
     max-height: 400px;
@@ -515,10 +526,6 @@
   .cardModalImage img {
     max-width: 100%;
     max-height: 400px;
-  }
-
-  .modalDataArea {
-    
   }
   .modalDataArea .descTitle {
     font-weight: bold;
@@ -537,7 +544,7 @@
 
   .costumeModalFooter {
     border-top: 1px solid rgb(211, 211, 211);
-    position: absolute; 
+    position: absolute;
     bottom: 0;
     height: 60px;
     width: 100%;
@@ -580,7 +587,7 @@
     position: relative;
   }
 
-  .modalImgDownload a{
+  .modalImgDownload a {
     color: #f2f2f2;
   }
 
@@ -596,9 +603,6 @@
   @media screen and (max-width: 1065px) {
     .costumeGrid {
       grid-template-columns: 1fr;
-    }
-    .cardModalBody {
-      flex-direction: column;
     }
   }
 

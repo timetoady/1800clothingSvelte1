@@ -14,7 +14,7 @@ In this readme, we'll briefly note the site's bumpy version history. Following, 
 
 ## History
 
-The site began it's life as a group project in the Computer Science area of Utah Valley University. The initial site had many problems: it had little input from UX design, links that broke the CSS if pressed in a certain combination, and a database written in some inscrutable form of PHP that sometimes simply refused to load. Add to that, the actual content was what the client wanted presented, and the quality of the images used was low. There was also absolutely no documentation of the structure, setup, functions, or technology used in the code.
+The site began it's life as a group project in the Computer Science area of Utah Valley University. The initial site had many problems: it had little input from UX design, links that broke the CSS if pressed in a certain combination, and a database written in some inscrutable form of PHP that sometimes simply refused to load. Add to that, the actual content was not what the client wanted presented, and the quality of the images used was low. There was also absolutely no documentation of the structure, setup, functions, or technology used in the code.
 
 Version 2 of the site began as a desire from the client for a backend to be added to add additional entries. But it was quickly apparent to the Digital Media group (also at UVU) who took on the project that giving the ability to add entries to a site who looked and worked so poorly would be pointless. That idea was scrapped, and the effort of v2 was to simply revise the site in simple HTML and CSS with a few small vanilla JavaScript functions to fix all broken links, and load the clothing images and their information promptly. The styling was only simply revised, and little consideration was taken into true UX design: the goal was simply to get a working product out the door.
 
@@ -38,7 +38,7 @@ For the database, there were a limited number of economical options that didn't 
 ### Structure
 
 `/src` houses all the Svelte parts. These are broken into components, with `App.svelte` being the parent component, housing `Landing.svelte` and the `Nav`
-`/public` is where all compiled JavaScript, CSS and HTML are stored, as well as all assets (costume images, costume thumbnails, and the original decade chapter PDFs.)
+`/public` is where all compiled JavaScript, CSS and HTML are stored, as well as all assets (costume images, costume thumbnails, and the original decade chapter PDFs.) There are also a couple more global CSS files in public (`global.css` for the whole document, `landingStyles.css` for the landing page, and `compStyles.css` for the nav component) because of the way Svelte governs CSS only to locally declared elements. 
 
 
 ## Future Enhancements
