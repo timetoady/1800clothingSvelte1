@@ -1,9 +1,9 @@
 # 1800s Clothing
 
-1. Introduction
-2. History
-3. Structure and Features of this version
-4. Future enhancements
+1. [Introduction](#introduction)
+2. [History](#history)
+3. [Structure and Features of this version](##structure-and-Features-1800clothing-v3)
+4. [Future enhancements](#future-enhancements)
 
 
 ## Introduction 
