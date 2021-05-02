@@ -307,8 +307,6 @@
   <link rel="stylesheet" href="landingStyles.css" />
 </svelte:head>
 
-<!-- <svelte:window bind:scrollY={y} /> -->
-
 <div class="landing">
   <!-- Filter area -->
   <FilterArea2 />
@@ -340,7 +338,7 @@
         showStepOptions={true}
         on:setPage={(e) => {
           currentPage = e.detail.page;
-          // y = 0;
+          document.querySelector('#paginationDiv').scrollTop = 0
         }}
       />
     </div>
