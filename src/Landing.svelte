@@ -485,7 +485,7 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    top: 15px;
+    top: 20px;
     right: 20px;
     cursor: pointer;
   }
@@ -495,7 +495,7 @@
   .exitBtn svg {
     width: 16px;
     position: relative;
-    top: -6px;
+    top: -10px;
     left: -1px;
   }
 
