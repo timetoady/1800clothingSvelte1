@@ -79,3 +79,12 @@ button:not(:disabled):active {
 button:focus {
 	/* border-color: #666; */
 }
+
+
+.mobilePopup a {
+	color: #212529;
+}
+.mobilePopup a:hover {
+	text-decoration: none;
+	color: #212529;
+}

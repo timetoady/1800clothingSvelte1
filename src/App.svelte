@@ -55,9 +55,4 @@
     background-color: #333;
     height: 20px;
   }
-  @media screen and (max-width: 700px) {
-    main {
-      height: calc(100vh - 117px);
-    }
-  }
 </style>
