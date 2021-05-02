@@ -91,6 +91,7 @@
   .contentWrapper {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
   }
   .welcomeMessageBackground {
     background-color: rgb(235, 221, 205);
@@ -126,10 +127,12 @@
     display: grid;
     grid-template-columns: 300px auto;
     grid-gap: 20px;
+    padding-top: 10px;
   }
   .carmaContent .carmaPhoto {
     border-radius: 50%;
     margin: 0 auto;
+    padding: 20px 0;
   }
 
   @media screen and (max-width: 900px) {
@@ -138,6 +141,9 @@
     }
   }
   @media screen and (max-width: 600px) {
+    .contentWrapper {
+      padding: 0 8px;
+    }
     .welcomeMessage {
       width: 100%;
     }
