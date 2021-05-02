@@ -79,12 +79,24 @@
   </div>
   <div class="viewer">
     <div class="bookBox">
-      <a class="download" href={pdfBase + ".pdf"} download
-        >Download Decade <Fa icon={faDownload} /></a
-      >
+      {#if pdfURL !== './assets/pdfs/defaultView.pdf' }
+        <a class="download" href={pdfBase + ".pdf"} download
+          >Download Decade <Fa icon={faDownload} /></a
+        >
+      {/if }
     </div>
     <div class="viewerBox">
-      <iframe title="PDFviewer" src={pdfURL} />
+      {#if pdfURL === './assets/pdfs/defaultView.pdf'}
+        <div class="selectBookDiv">
+          <div>
+            <h1 class="selectBookMessage">Select a Chapter to Preview</h1>
+            <svg class="bookSVG" width="200px" height="200px" viewBox="0 0 24 24"><path d="M23 5v13.883l-1 .117v-16c-3.895.119-7.505.762-10.002 2.316-2.496-1.554-6.102-2.197-9.998-2.316v16l-1-.117v-13.883h-1v15h9.057c1.479 0 1.641 1 2.941 1 1.304 0 1.461-1 2.942-1h9.06v-15h-1zm-12 13.645c-1.946-.772-4.137-1.269-7-1.484v-12.051c2.352.197 4.996.675 7 1.922v11.613zm9-1.484c-2.863.215-5.054.712-7 1.484v-11.613c2.004-1.247 4.648-1.725 7-1.922v12.051z"/></svg>
+          </div>
+        </div>
+      {:else}
+        <iframe title="PDFviewer" src={pdfURL} />
+
+      {/if}
     </div>
   </div>
 </div>
@@ -120,6 +132,7 @@
   .viewerBox {
     width: 70vw;
     padding: 0.2rem 2rem;
+    height: 80%;
   }
   .viewerBox iframe {
     width: 100%;
@@ -129,8 +142,23 @@
     text-align: right;
   }
   div.bookBox {
+    padding: 6px;
     text-align: right;
   }
+  .selectBookDiv {
+    text-align: center;
+    display: grid;
+    place-items: center;
+    height: 100%;
+  }
+  .selectBookDiv .selectBookMessage {
+    padding: 10px;
+    font-weight: bold;
+  }
+  .selectBookDiv .bookSVG {
+    height: 200px;
+  }
+
   @media screen and (max-width: 900px) {
     .theBook {
       flex-direction: column;
