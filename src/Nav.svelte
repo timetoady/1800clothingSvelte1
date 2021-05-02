@@ -7,15 +7,7 @@
 <header>
   <Router {url}>
     <div>
-      <Link to="/"
-        ><img
-          class="title"
-
-          src="./assets/logo.png"
-
-          alt="1800clothing.org"
-        /></Link
-      >
+      <Link to="/"><img class="title" src="./assets/logo/logoVer4.png" alt="1800clothing.org"/></Link>
     </div>
     <nav>
       <Link to="about">
