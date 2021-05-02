@@ -34,6 +34,15 @@ Individual pages are served using [`svelte-routing`](https://www.npmjs.com/packa
 
 For the database, there were a limited number of economical options that didn't have a mandatory sleep where it takes 10-15 seconds to wake up after a period of inactivity. In v2 we accepted this as a compromise, but for this one, we opted instead to go serverless. Because the total number of costume/clothing entries is just around 1000, this serves from a local JSON (`costumes.json`) with limit loading time, and immediate response. This does make adding additional entries a little more manual, but for the scope at present it served the need.
 
+#### Making the costumes.json
+
+// Explain process of converting the CSV sheets to JSON. Put copy of CSV file(s) into github repo so a future group can modify / add costumes.
+
+#### Getting access to Bluehost FTP 
+
+#### Form handling (maybe put this into future enchancements?)
+
+#### Previous repos for the project?
 
 ### Structure
 
@@ -49,3 +58,4 @@ For the database, there were a limited number of economical options that didn't 
 
 * Improved mobile functionality - since the majority of users tested as focusing on the desktop version (academic and work research tends to not be done on mobile) the majority of our attention was placed there. The site is still reasonably responsive, but menu and layout improvements can definitely be made if it becomes apparent that users are focusing there.
 
+* Some costume items have multiple images - currently the only first image for each costume displays, it would probably be a good idea to have an image system that is able to display all images.
