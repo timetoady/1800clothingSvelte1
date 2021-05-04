@@ -5,20 +5,7 @@
 <div class="copyrightFormBackground">
   <form name="copyright" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="CopyrightForm">
     <div class="exitBtn" on:click={toggleContactForm}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><style>.cls-1{fill:#ebebeb;}.cls-2{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:19px;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><circle class="cls-1" cx="256" cy="256" r="256"/><path class="cls-2" d="M345,345.53l-178-178m178,0-178,178"/></g></g></svg>
     </div>
     <div class="formDetails">
       <h1>Copyright Claim Form</h1>
@@ -98,23 +85,18 @@
 
   .exitBtn {
     padding: 5px;
-    background-color: rgb(235, 235, 235);
     position: absolute;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+    width: 35px;
+    height: 35px;
     top: 15px;
     right: 20px;
     cursor: pointer;
   }
-  .exitBtn:hover {
-    background-color: rgb(228, 228, 228);
-  }
   .exitBtn svg {
-    width: 16px;
-    position: relative;
-    top: -6px;
-    left: -1px;
+    width: 100%;
+  }
+  .exitBtn:hover svg .cls-1 { 
+    fill: rgb(226, 226, 226);
   }
 
   .formDetails {
