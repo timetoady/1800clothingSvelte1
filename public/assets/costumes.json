@@ -10683,7 +10683,8 @@
   },
   {
     "id": 767,
-    "image": "not found",
+    "image": "1120_image.jpg",
+    "thumbnail": "1120_image_thumbnail.jpg",
     "year_from": 1870,
     "year_to": 1879,
     "pdf": "1870-1879",
