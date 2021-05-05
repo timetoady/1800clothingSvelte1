@@ -16,7 +16,7 @@ In this readme, we'll briefly note the site's bumpy version history. Following, 
 
 The site began it's life as a group project in the Computer Science area of Utah Valley University. The initial site had many problems: it had little input from UX design, links that broke the CSS if pressed in a certain combination, and a database written in some inscrutable form of PHP that sometimes simply refused to load. Add to that, the actual content was not what the client wanted presented, and the quality of the images used was low. There was also absolutely no documentation of the structure, setup, functions, or technology used in the code.
 
-Version 2 of the site began as a desire from the client for a backend to be added to add additional entries. But it was quickly apparent to the Digital Media group (also at UVU) who took on the project that giving the ability to add entries to a site who looked and worked so poorly would be pointless. That idea was scrapped, and the effort of v2 was to simply revise the site in simple HTML and CSS with a few small vanilla JavaScript functions to fix all broken links, and load the clothing images and their information promptly. The styling was only simply revised, and little consideration was taken into true UX design: the goal was simply to get a working product out the door.
+Version 2 of the site began as a desire from the client for a backend to be added to add additional entries. But it was quickly apparent to the Digital Media group (also at UVU) who took on the project that giving the ability to add entries to a site who looked and worked so poorly would be pointless. That idea was scrapped, and the effort of v2 was to simply revise the site in simple HTML and CSS with a few small vanilla JavaScript functions to fix all broken links, and load the clothing images and their information promptly. The styling was only simply revised, and little consideration was taken into true UX design: the goal was simply to get a working product out the door. The backend for getting costumes data was replaced with a Heroku Node API server that returns costumes to the frontend. However, the downside of using the free tier of Heroku is that the server goes to sleep after 30 minutes of activity.
 
 By the end of version 2, a working version was completed and uploaded to Bluehost where 1800clothing.org is hosted, but it was clear to the developers of this version (that's us) that a lot more would need to be to move the site from "working" to "usable", including input from design, and basically an entire restructuring of the site and its technology to make it modern. Thus, this version, Version 3.
 
@@ -24,7 +24,7 @@ By the end of version 2, a working version was completed and uploaded to Bluehos
 
 ### Design
 
-//Emma here?
+The site is broken up into three main pages; the main page (which is the costumes page), the Book page, and the About page. In the past there were additional pages for contact and permissions, however these pages were deemed unnecessary and could be implemented in different ways. 
 
 ### Technologies
 
@@ -36,13 +36,19 @@ For the database, there were a limited number of economical options that didn't 
 
 #### Making the costumes.json
 
-// Explain process of converting the CSV sheets to JSON. Put copy of CSV file(s) into github repo so a future group can modify / add costumes.
+The costumes.json file is created by converting a CSV file to a JSON file. CSV files are files that can be open in spreadsheets, and so our main environment for transferring the data from the Book PDFs to a form that an application can use was copying and pasting the info from the book to a spreadsheet. This method is better than just editing a JSON file. The site https://csvjson.com/ was used to convert the CSV files to JSON. A copy of the CSV files is included in this repo, so you can just open that file in a Google Document or Excel to edit the costumes.
 
 #### Getting access to Bluehost FTP 
 
-#### Form handling (maybe put this into future enchancements?)
+The site is currently being hosted on Bluehost. The Bluehost account hosting the site is owned by Dan Hatch, so in order to get the credentials for the FTP, you need to get it from him. The files for 1800clothing are located in a folder. In the past, the site used to run off of PHP, however we don't recommend you go back to using any of the PHP used in the past. We wasted a lot of time on this for the Interaction Design practicum, but it's really just a dead end. If you're going to build a back end for this site, you should probably do it off of the Bluehost server.
 
-#### Previous repos for the project?
+#### Previous repos for the project
+
+Repo for the frontend and images of version 2 of 1800 clothing: https://github.com/timetoady/1800clothing
+
+Node server for serving costumes to front end app: https://github.com/bingland/1800-clothing-node
+
+A prototype for 1800s clothing written in React: https://github.com/bingland/1800-clothing-react
 
 ### Structure
 
@@ -59,3 +65,5 @@ For the database, there were a limited number of economical options that didn't 
 * Improved mobile functionality - since the majority of users tested as focusing on the desktop version (academic and work research tends to not be done on mobile) the majority of our attention was placed there. The site is still reasonably responsive, but menu and layout improvements can definitely be made if it becomes apparent that users are focusing there.
 
 * Some costume items have multiple images - currently the only first image for each costume displays, it would probably be a good idea to have an image system that is able to display all images.
+
+* Copyright form - There is a Copyright Form that was made, however when we tried hooking it up to Netlify form handling, it wouldn't work so we had to cut it out. There is currently not a backend for this site, so if you can implement form handling then there is a copyright form already made for you. The link for the form is currently commented out in the FilterArea2 component.
