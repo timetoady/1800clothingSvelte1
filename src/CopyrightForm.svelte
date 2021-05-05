@@ -42,11 +42,13 @@
       <label for="additionalComments"
         >Would you like this image removed from the site?</label
       ><br />
-      <CustomInput
+      <!-- <CustomInput
       type="switch"
       id="exampleCustomSwitch"
       name="deleteOption"
-      label="Yes, please remove it." />
+      label="Yes, please remove it." /> -->
+      <input type="checkbox" name="deleteOption" id="yesOption">
+      <label for="yesOption">Yes</label>
       <!-- <input
         type="radio"
         id="yesOption"
