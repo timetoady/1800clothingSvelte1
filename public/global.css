@@ -16,10 +16,6 @@ html {
 	font-family: Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-html {
-	overflow: hidden;
-}
-
 html, body {
 	position: relative;
 	width: 100%;
