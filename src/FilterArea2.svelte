@@ -526,4 +526,12 @@
       width: 100%;
     } */
   }
+
+  /* filters have overlow scroll on desktop, not on mobile  */
+  /* i'm using a media query for this because for some reason the mobile filters' height is small  when i style it directly  */
+  @media screen and (min-width: 701px) {
+    .filters {
+      overflow-y: auto;
+    }
+  }
 </style>
