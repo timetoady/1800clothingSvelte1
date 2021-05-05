@@ -2129,7 +2129,7 @@
   },
   {
     "id": 153,
-    "image": "[0167_image.jpg, not found]",
+    "image": "0167_image.jpg",
     "thumbnail": "0167_image_thumbnail.jpg",
     "year_from": 1820,
     "year_to": 1850,
@@ -2199,7 +2199,7 @@
   },
   {
     "id": 158,
-    "image": "[0237_image.jpg. 0177_image.jpg]",
+    "image": "0237_image.jpg",
     "thumbnail": "0237_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2226,7 +2226,7 @@
   },
   {
     "id": 160,
-    "image": "[0197_image.jpg, 0274_image.jpg]",
+    "image": "0197_image.jpg",
     "thumbnail": "0197_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2240,7 +2240,7 @@
   },
   {
     "id": 161,
-    "image": "[0637_image.jpg, 0219_image.jpg, 0218_image.jpg]",
+    "image": "0637_image.jpg",
     "thumbnail": "0637_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2254,7 +2254,7 @@
   },
   {
     "id": 162,
-    "image": "[0009_image.jpg + not found]",
+    "image": "0009_image.jpg",
     "thumbnail": "0009_image_thumbnail.jpg",
     "year_from": 1800,
     "year_to": 1830,
@@ -2436,7 +2436,7 @@
   },
   {
     "id": 175,
-    "image": "[0242_image.jpg, 0245_image.jpg]",
+    "image": "0242_image.jpg",
     "thumbnail": "0242_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2478,7 +2478,7 @@
   },
   {
     "id": 178,
-    "image": "[0269_image.jpg, 0266_image.jpg]",
+    "image": "0269_image.jpg",
     "thumbnail": "0269_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2492,7 +2492,7 @@
   },
   {
     "id": 179,
-    "image": "[0470_image.jpg, 0214_image.jpg]",
+    "image": "0470_image.jpg",
     "thumbnail": "0470_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2506,7 +2506,7 @@
   },
   {
     "id": 180,
-    "image": "[0254_image.jpg, 0255_image.jpg]",
+    "image": "0254_image.jpg",
     "thumbnail": "0254_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2590,7 +2590,7 @@
   },
   {
     "id": 186,
-    "image": "[0169_image.jpg, 0251_image.jpg]",
+    "image": "0169_image.jpg",
     "thumbnail": "0169_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2674,7 +2674,7 @@
   },
   {
     "id": 192,
-    "image": "[0194_image.jpg, 0267_image.jpg]",
+    "image": "0194_image.jpg",
     "thumbnail": "0194_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1850,
@@ -2688,7 +2688,7 @@
   },
   {
     "id": 193,
-    "image": "[0158_image.jpg, 0160_image.jpg]",
+    "image": "0158_image.jpg",
     "thumbnail": "0158_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2772,7 +2772,7 @@
   },
   {
     "id": 199,
-    "image": "[0674_image.jpg, 0225_image.jpg]",
+    "image": "0674_image.jpg",
     "thumbnail": "0674_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1840,
@@ -2870,7 +2870,7 @@
   },
   {
     "id": 206,
-    "image": "[0262_image.jpg, 0182_image.jpg]",
+    "image": "0262_image.jpg",
     "thumbnail": "0262_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2898,7 +2898,7 @@
   },
   {
     "id": 208,
-    "image": "[0268_image.jpg, 0239_image.jpg]",
+    "image": "0268_image.jpg",
     "thumbnail": "0268_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1835,
@@ -2940,7 +2940,7 @@
   },
   {
     "id": 211,
-    "image": "[0181_image.jpg, 0238_image.jpg]",
+    "image": "0181_image.jpg",
     "thumbnail": "0181_image_thumbnail.jpg",
     "year_from": 1831,
     "year_to": 1835,
@@ -2954,7 +2954,7 @@
   },
   {
     "id": 213,
-    "image": "[0260_image.jpg, 0619_image.jpg]",
+    "image": "0260_image.jpg",
     "thumbnail": "0260_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -2996,7 +2996,7 @@
   },
   {
     "id": 216,
-    "image": "[0179_image.jpg, 0662_image.jpg]",
+    "image": "0179_image.jpg",
     "thumbnail": "0179_image_thumbnail.jpg",
     "year_from": 1830,
     "year_to": 1839,
@@ -3416,7 +3416,7 @@
   },
   {
     "id": 247,
-    "image": "[0199_image.jpg, 0205_image.jpg]",
+    "image": "0199_image.jpg",
     "thumbnail": "0199_image_thumbnail.jpg",
     "year_from": 1820,
     "year_to": 1850,
@@ -3822,7 +3822,7 @@
   },
   {
     "id": 276,
-    "image": "[0290_image.jpg, 0291_image.jpg]",
+    "image": "0290_image.jpg",
     "thumbnail": "0290_image_thumbnail.jpg",
     "year_from": 1840,
     "year_to": 1849,
@@ -3836,7 +3836,7 @@
   },
   {
     "id": 277,
-    "image": "[0292_image.jpg, 0293_image.jpg]",
+    "image": "0292_image.jpg",
     "thumbnail": "0292_image_thumbnail.jpg",
     "year_from": 1840,
     "year_to": 1849,
@@ -3850,7 +3850,7 @@
   },
   {
     "id": 278,
-    "image": "[0298_image.jpg, 0294_image.jpg]",
+    "image": "0298_image.jpg",
     "thumbnail": "0298_image_thumbnail.jpg",
     "year_from": 1840,
     "year_to": 1849,
@@ -4144,7 +4144,7 @@
   },
   {
     "id": 299,
-    "image": "[0608_image.jpg, 1060_image.JPG]",
+    "image": "0608_image.jpg",
     "thumbnail": "0608_image_thumbnail.jpg",
     "year_from": 1840,
     "year_to": 1849,
@@ -7896,7 +7896,7 @@
   },
   {
     "id": 567,
-    "image": "[0429_image.jpg, 0404_image.jpg]",
+    "image": "0429_image.jpg",
     "thumbnail": "0429_image_thumbnail.jpg",
     "year_from": 1800,
     "year_to": 1899,
@@ -11569,7 +11569,7 @@
   },
   {
     "id": 832,
-    "image": "[0958_image.JPG, 1003_image.JPG]",
+    "image": "0958_image.JPG",
     "thumbnail": "0958_image_thumbnail.JPG",
     "year_from": 1880,
     "year_to": 1889,
@@ -11694,7 +11694,7 @@
   },
   {
     "id": 841,
-    "image": "[0973_image.JPG, 0974_image.JPG]",
+    "image": "0973_image.JPG",
     "thumbnail": "0973_image_thumbnail.JPG",
     "year_from": 1880,
     "year_to": 1889,
@@ -11736,7 +11736,7 @@
   },
   {
     "id": 844,
-    "image": "[0977_image.JPG, 1001_image.JPG]",
+    "image": "0977_image.JPG",
     "thumbnail": "0977_image_thumbnail.JPG",
     "year_from": 1880,
     "year_to": 1889,

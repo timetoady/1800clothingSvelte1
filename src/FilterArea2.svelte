@@ -450,13 +450,18 @@
     {/if}
   </Nav>
 
+  <!--  Copyright Form
+
+  commenting this out because form handling isn't 
+  working on netlify for whatever reason
+  
   <div class="formLinks">
     <div class="linkText">
       Copyright claim? <div class="formLink" on:click={toggleContactForm}>
         Click here.
       </div>
     </div>
-  </div>
+  </div> -->
 
   {#if showContactForm}
     <CopyrightForm {toggleContactForm} />

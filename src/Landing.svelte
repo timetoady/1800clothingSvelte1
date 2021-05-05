@@ -348,20 +348,7 @@
     <div class="costumeModalBackground">
       <div class="costumeModal">
         <div class="exitBtn" on:click={toggleModal}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><style>.cls-1{fill:#ebebeb;}.cls-2{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:19px;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><circle class="cls-1" cx="256" cy="256" r="256"/><path class="cls-2" d="M345,345.53l-178-178m178,0-178,178"/></g></g></svg>
         </div>
         <div class="costumeModalHeader">
           <h1>{$currentCostume.caption}</h1>
@@ -480,23 +467,18 @@
 
   .exitBtn {
     padding: 5px;
-    background-color: rgb(235, 235, 235);
     position: absolute;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    top: 20px;
+    width: 35px;
+    height: 35px;
+    top: 15px;
     right: 20px;
     cursor: pointer;
   }
-  .exitBtn:hover {
-    background-color: rgb(228, 228, 228);
-  }
   .exitBtn svg {
-    width: 16px;
-    position: relative;
-    top: -10px;
-    left: -1px;
+    width: 100%;
+  }
+  .exitBtn:hover svg .cls-1 { 
+    fill: rgb(226, 226, 226);
   }
 
   .costumeModalHeader {
@@ -508,22 +490,29 @@
     font-size: 25px;
     font-weight: bold;
     line-height: 1.4;
-    padding-right: 30px;
+    padding-right: 40px;
   }
 
   .costumeModalBody {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: auto 1fr;
     grid-gap: 20px;
     padding: 20px;
+    padding-top: 10px;
+  }
+  .modalImageArea {
+    min-width: 160px;
+    max-width: 330px;
   }
   .cardModalImage {
     width: 100%;
     max-height: 400px;
+    display: grid;
+    place-items: center;
   }
   .cardModalImage img {
     max-width: 100%;
-    max-height: 400px;
+    max-height: 300px;
   }
   .modalDataArea .descTitle {
     font-weight: bold;
@@ -538,6 +527,7 @@
   }
   .modalDataArea .costumeSrc {
     margin-top: 10px;
+    overflow-wrap: anywhere;
   }
 
   .costumeModalFooter {
@@ -581,8 +571,10 @@
     text-align: right;
     margin-top: -2.5rem;
     background-color: rgba(0, 0, 0, 0.808);
-    padding: 0.5rem;
     position: relative;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
   }
 
   .modalImgDownload a {
@@ -621,6 +613,9 @@
     .costumeModal {
       height: 95%;
     }
+    .modalImageArea {
+      max-width: 250px;
+    }
   }
 
   @media screen and (max-width: 600px) {
@@ -630,6 +625,9 @@
     .costumeModalBody {
       grid-template-columns: 1fr;
       padding-bottom: 70px;
+    }
+    .modalImageArea {
+      max-width: 1000px;
     }
   }
 </style>

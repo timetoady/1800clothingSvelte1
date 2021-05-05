@@ -11,6 +11,18 @@
     pdfPreview = `${url}preview.pdf`;
     console.log(pdfURL);
   };
+
+  let showMobileSelect = true
+  const toggleMobileSelect = () => {
+    showMobileSelect = !showMobileSelect
+  }
+  const handleMobileViewerUpdate = (url) => {
+    showMobileSelect = !showMobileSelect
+    console.log(url);
+    pdfBase = url;
+    pdfPreview = `${url}preview.pdf`;
+    console.log(pdfURL);
+  }
 </script>
 
 <svelte:head>
@@ -22,7 +34,7 @@
 </svelte:head>
 
 <div class="theBook">
-  <div class="navigation">
+  <div class="desktopNavigation navigation">
     <h5>Books</h5>
     <div class="navigationBackground">
       <Nav vertical>
@@ -77,6 +89,66 @@
       </Nav>
     </div>
   </div>
+
+  <h5 class="mobileSelectText" on:click={toggleMobileSelect}>View Decades...</h5>
+  
+  {#if showMobileSelect}
+    <div class="mobileNavigation navigation">
+      <h5>Books</h5>
+      <div class="navigationBackground">
+        <Nav vertical>
+          <NavItem>
+            <div class={pdfBase === "1800-1819" ? "bookLabel active" : "bookLabel"} on:click={() => handleMobileViewerUpdate("1800-1819")}>
+              <p>1800-1819</p>
+              <img src="./assets/icons/forwardArrow.svg" alt="select book" />
+            </div>
+          </NavItem>
+          <NavItem>
+            <div class={pdfBase === "1820-1829" ? "bookLabel active" : "bookLabel"} on:click={() => handleMobileViewerUpdate("1820-1829")}>
+              <p>1820-1829</p>
+              <img src="./assets/icons/forwardArrow.svg" alt="select book" />
+            </div>
+          </NavItem>
+          <NavItem>
+            <div class={pdfBase === "1830s" ? "bookLabel active" : "bookLabel"} on:click={() => handleMobileViewerUpdate("1830s")}>
+              <p>1830-1839</p>
+              <img src="./assets/icons/forwardArrow.svg" alt="select book" />
+            </div>
+          </NavItem>
+          <NavItem>
+            <div class={pdfBase === "1840s" ? "bookLabel active" : "bookLabel"} on:click={() => handleMobileViewerUpdate("1840s")}>
+              <p>1840-1849</p>
+              <img src="./assets/icons/forwardArrow.svg" alt="select book" />
+            </div>
+          </NavItem>
+          <NavItem>
+            <div class={pdfBase === "1850s" ? "bookLabel active" : "bookLabel"} on:click={() => handleMobileViewerUpdate("1850s")}>
+              <p>1850-1859</p>
+              <img src="./assets/icons/forwardArrow.svg" alt="select book" />
+            </div>
+          </NavItem>
+          <NavItem>
+            <div class={pdfBase === "1860s" ? "bookLabel active" : "bookLabel"} on:click={() => handleMobileViewerUpdate("1860s")}>
+              <p>1860-1869</p>
+              <img src="./assets/icons/forwardArrow.svg" alt="select book" />
+            </div>
+          </NavItem>
+          <NavItem>
+            <div class={pdfBase === "1870s" ? "bookLabel active" : "bookLabel"} on:click={() => handleMobileViewerUpdate("1870s")}>
+              <p>1870-1879</p>
+              <img src="./assets/icons/forwardArrow.svg" alt="select book" />
+            </div>
+          </NavItem>
+          <NavItem>
+            <div class={pdfBase === "1880s" ? "bookLabel active" : "bookLabel"} on:click={() => handleMobileViewerUpdate("1880s")}>
+              <p>1880-1889</p>
+              <img src="./assets/icons/forwardArrow.svg" alt="select book" />
+            </div>
+          </NavItem>
+        </Nav>
+      </div>
+    </div>
+  {/if}
   <div class="viewer">
     <div class="bookBox">
       {#if pdfURL !== './assets/pdfs/defaultView.pdf' }
@@ -106,6 +178,69 @@
     display: flex;
     height: calc(100vh - 60px);
   }
+
+  .mobileSelectText {
+    margin: 0;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    text-align: center;
+    font-size: 18px;
+    background-color: #F1E5D4;
+    padding: 8px 12px;
+    display: none;
+    cursor: pointer;
+    height: 37px;
+  }
+
+  .mobileNavigation {
+    display: none;
+    height: calc(100vh - 60px);
+    background-color: #F1E5D4;
+    z-index: 9;
+    top: 60px;
+    padding: 0;
+    margin: 0;
+  }
+  .mobileNavigation h5 {
+    text-align: center;
+    background-color: #F1E5D4;
+  }
+  .mobileNavigation .bookLabel {
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 7px;
+  }
+  .mobileNavigation .active {
+    background-color:rgb(238, 238, 238);
+  }
+  .mobileNavigation .bookLabel p {
+    margin-left: 10px;
+  }
+  .mobileNavigation .bookLabel img {
+    width: 20px;
+    margin-right: 12px;
+  }
+
+  @media only screen and (max-width: 900px) {
+    .theBook {
+      display: block;
+      position: relative;
+    }
+    .mobileNavigation {
+      display: block;
+      position: fixed;
+    }
+    .desktopNavigation {
+      display: none;
+    }
+    .mobileSelectText {
+      display: block;
+    }
+    .selectBookDiv {
+      display: none;
+    }
+  }
+
   .navigation {
     min-width: 209px;
     border-right: 1px solid rgba(128, 128, 128, 0.5);
@@ -114,8 +249,9 @@
     height: 100%;
   }
   .navigation h5 {
+    background-color: #F1E5D4;
     margin: 0;
-    padding: 0.25rem 0.75rem;
+    padding: 6px 12px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.5);
   }
   .navigationBackground {
@@ -164,7 +300,6 @@
       flex-direction: column;
     }
     .navigation {
-      height: unset;
       min-width: unset;
       width: 100%;
     }
@@ -173,15 +308,14 @@
     }
     .viewer {
       margin: 0;
-      padding: .2rem;
     }
     .viewerBox {
       width: 100%;
-      padding: 0.2rem;
+      padding: 0 3px;
     }
     .viewerBox iframe {
       width: 100%;
-      height: 80vh;
+      height: calc(100vh - 140px);
     }
     a.download {
       text-align: center;

@@ -37,14 +37,16 @@
     background-color: rgb(252, 252, 252);
   }
   .item .cardBody {
-    display: grid;
-    grid-template-columns: auto auto; 
-    max-height: calc(100% - 55px);
+    display: flex;
+    align-items: flex-start;
+    height: calc(100% - 55px);
     padding: 10px;
   }
 
   .cardFooter {
     border-top: 1px solid rgb(236, 236, 236);
+    background-color: white;
+    border-radius: 0 0 10px 10px;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -65,6 +67,9 @@
   }
   .cardBody img {
     height: auto;
+    object-fit: contain;
+    vertical-align: top;
+    width: 100%;
     max-height: 175px;
     max-width: 130px;
   }
@@ -95,7 +100,6 @@
       min-width: none;
     }
     .cardBody {
-      grid-template-columns: 1fr;
       width: 100%;
       min-width: none;
     }
@@ -105,7 +109,7 @@
     }
     .caption {
       max-width: 100%;
-      min-width: none;
+      min-width: 0;
       width: 100%;
     }
     .cardFooter {
