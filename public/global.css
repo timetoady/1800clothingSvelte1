@@ -88,3 +88,8 @@ button:focus {
 	text-decoration: none;
 	color: #212529;
 }
+
+/* nav item components have padding that messes with background-color */
+.mobileNavigation .nav-item {
+	padding: 0 !important;
+}
