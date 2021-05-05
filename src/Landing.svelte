@@ -490,22 +490,29 @@
     font-size: 25px;
     font-weight: bold;
     line-height: 1.4;
-    padding-right: 30px;
+    padding-right: 40px;
   }
 
   .costumeModalBody {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: auto 1fr;
     grid-gap: 20px;
     padding: 20px;
+    padding-top: 10px;
+  }
+  .modalImageArea {
+    min-width: 160px;
+    max-width: 330px;
   }
   .cardModalImage {
     width: 100%;
     max-height: 400px;
+    display: grid;
+    place-items: center;
   }
   .cardModalImage img {
     max-width: 100%;
-    max-height: 400px;
+    max-height: 300px;
   }
   .modalDataArea .descTitle {
     font-weight: bold;
@@ -520,6 +527,7 @@
   }
   .modalDataArea .costumeSrc {
     margin-top: 10px;
+    overflow-wrap: anywhere;
   }
 
   .costumeModalFooter {
@@ -563,8 +571,10 @@
     text-align: right;
     margin-top: -2.5rem;
     background-color: rgba(0, 0, 0, 0.808);
-    padding: 0.5rem;
     position: relative;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
   }
 
   .modalImgDownload a {
@@ -603,6 +613,9 @@
     .costumeModal {
       height: 95%;
     }
+    .modalImageArea {
+      max-width: 250px;
+    }
   }
 
   @media screen and (max-width: 600px) {
@@ -612,6 +625,9 @@
     .costumeModalBody {
       grid-template-columns: 1fr;
       padding-bottom: 70px;
+    }
+    .modalImageArea {
+      max-width: 1000px;
     }
   }
 </style>
