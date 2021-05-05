@@ -1,5 +1,6 @@
 <script>
   export let toggleContactForm;
+  import { CustomInput } from "sveltestrap";
 </script>
 
 <div class="copyrightFormBackground">
@@ -41,7 +42,12 @@
       <label for="additionalComments"
         >Would you like this image removed from the site?</label
       ><br />
-      <input
+      <CustomInput
+      type="switch"
+      id="exampleCustomSwitch"
+      name="deleteOption"
+      label="Yes, please remove it." />
+      <!-- <input
         type="radio"
         id="yesOption"
         name="deleteOption"
@@ -50,7 +56,8 @@
       />
       <label for="yesOption">Yes</label>
       <input type="radio" id="noOption" name="deleteOption" value="no" />
-      <label for="noOption">No</label>
+      <label for="noOption">No</label> -->
+
     </div>
       
     <div class="submitBar">
