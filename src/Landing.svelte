@@ -519,7 +519,7 @@
     font-size: 18px;
   }
   .modalDataArea .descContent {
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 250px;
     border: 1px solid rgb(211, 211, 211);
     border-radius: 6px;
